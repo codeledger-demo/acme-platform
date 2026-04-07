@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.codeledger/
+.claude/
+.env
+.env.local
+*.tsbuildinfo
+.pnpm-store/
+coverage/
+.DS_Store

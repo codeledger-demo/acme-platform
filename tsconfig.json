@@ -1,0 +1,17 @@
+{
+  "extends": "./tsconfig.base.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "references": [
+    { "path": "packages/shared-utils" },
+    { "path": "packages/validation" },
+    { "path": "packages/api-client" },
+    { "path": "packages/design-tokens" },
+    { "path": "services/auth" },
+    { "path": "services/billing" },
+    { "path": "services/notifications" },
+    { "path": "services/reporting" },
+    { "path": "services/webhooks" }
+  ]
+}

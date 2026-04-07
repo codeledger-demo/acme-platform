@@ -1,0 +1,5 @@
+# Simulator metadata (excluded from CIC processing)
+*.scenario.yaml
+.sre/
+DRAMA.md
+.github/badges/

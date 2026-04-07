@@ -1,0 +1,62 @@
+# This workflow is installed in acme-platform, not in synthetic-reality-engine
+# File: acme-platform/.github/workflows/codeledger-pr.yml
+name: CodeLedger PR Check
+on:
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  cic:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Install CodeLedger
+        run: npm install -g codeledger
+      - name: Run CIC
+        run: |
+          codeledger complete-check \
+            --task "${{ github.event.pull_request.title }}" \
+            --json > cic-result.json
+      - name: Run Verify
+        run: |
+          codeledger verify --json > verify-result.json
+      - name: Post results as PR comment
+        if: always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            let body = '## CodeLedger Results\n\n';
+            try {
+              const cic = JSON.parse(fs.readFileSync('cic-result.json', 'utf8'));
+              body += `**CIC Status:** ${cic.completion_state || 'unknown'}\n`;
+              body += `**Claims:** ${cic.verified_count || 0}/${cic.claim_count || 0} verified\n`;
+            } catch {
+              body += '**CIC:** Failed to parse results\n';
+            }
+            try {
+              const verify = JSON.parse(fs.readFileSync('verify-result.json', 'utf8'));
+              body += `**Verify:** ${verify.finding_count || 0} findings\n`;
+            } catch {
+              body += '**Verify:** Failed to parse results\n';
+            }
+            await github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body
+            });
+      - name: Upload artifacts
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: codeledger-results
+          path: |
+            cic-result.json
+            verify-result.json
