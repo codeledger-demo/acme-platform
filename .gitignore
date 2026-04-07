@@ -1,5 +1,6 @@
 node_modules/
 dist/
+.next/
 .codeledger/
 .claude/
 .env
@@ -8,3 +9,4 @@ dist/
 .pnpm-store/
 coverage/
 .DS_Store
+next-env.d.ts
