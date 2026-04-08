@@ -59,3 +59,29 @@ Drift, CIC failures, and Release Authority blocks appear in the public [CodeLedg
 ## License
 
 Intelligent Context AI Inc. — Confidential. Internal use only.
+
+<!-- DRAMA:START -->
+## Living Development Feed
+
+> This is a synthetic demonstration repository operated by CodeLedger.
+
+**Current Arc:** Clean Baseline (Arc 1)
+**Team Health:** 🟢 85/100
+**Last Activity:** just now
+
+### Recent Headlines
+
+
+### Developer Scorecards
+
+| Developer | CIC Pass Rate | PRs (30d) | Trend |
+|-----------|--------------|-----------|-------|
+| Sara Chen | 0% | 0 | — |
+| Marcus Webb | 0% | 0 | — |
+| Priya K | 0% | 0 | — |
+
+![Team Health](.github/badges/health.svg)
+
+---
+[View full dashboard](https://demo.codeledger.dev) | [Request a demo](https://codeledger.dev/demo)
+<!-- DRAMA:END -->
