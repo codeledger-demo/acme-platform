@@ -62,7 +62,7 @@ Read the CIC output in the PR comment. That's the core product in one PR.
 
 **The Drama Feed in this README is the *free* view**. The full experience is at:
 
-→ **https://demo.codeledger.dev** *(invite link required — ask your sales contact)*
+→ **https://demo.codeledger.dev** *(publicly accessible — no login required)*
 
 When you get there, the recommended click path is:
 

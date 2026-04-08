@@ -8,7 +8,7 @@
 
 **→ Read the [8-minute Prospect Guide](./PROSPECT_GUIDE.md) first.** It walks you through what you're looking at, the recommended click path, and what to pay attention to.
 
-**→ Or jump straight to the live dashboard:** [demo.codeledger.dev](https://demo.codeledger.dev) *(requires an invite link — ask your sales contact)*.
+**→ Or jump straight to the live dashboard:** [demo.codeledger.dev](https://demo.codeledger.dev) *(publicly accessible — no login required)*.
 
 ---
 
