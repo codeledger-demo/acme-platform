@@ -65,19 +65,20 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 > This is a synthetic demonstration repository operated by CodeLedger.
 
-**Current Arc:** Clean Baseline (Arc 1)
-**Team Health:** 🟢 85/100
-**Last Activity:** just now
+**Current Arc:** The Sprint Squeeze (Arc 2)
+**Team Health:** 🟡 80/100
+**Last Activity:** 6m ago
 
 ### Recent Headlines
 
+- **📋 Q4 sprint begins — checkout feature on tight deadline** *(6m ago, marcus-webb)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 0 | — |
-| Marcus Webb | 0% | 0 | — |
+| Marcus Webb | 0% | 1 | — |
 | Priya K | 0% | 0 | — |
 
 ![Team Health](.github/badges/health.svg)
