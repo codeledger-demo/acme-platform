@@ -75,11 +75,11 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** The Sprint Squeeze (Arc 2)
 **Team Health:** 🟡 80/100
-**Last Activity:** 6m ago
+**Last Activity:** 32m ago
 
 ### Recent Headlines
 
-- **📋 Q4 sprint begins — checkout feature on tight deadline** *(6m ago, marcus-webb)*
+- **📋 Q4 sprint begins — checkout feature on tight deadline** *(32m ago, marcus-webb)*
 
 ### Developer Scorecards
 
