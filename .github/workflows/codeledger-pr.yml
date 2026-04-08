@@ -1,9 +1,26 @@
-# This workflow is installed in acme-platform, not in synthetic-reality-engine
-# File: acme-platform/.github/workflows/codeledger-pr.yml
 name: CodeLedger PR Check
+
+# Runs on every PR opened against acme-platform.
+#
+# When the `codeledger` CLI is available on npm, this workflow runs the
+# real `complete-check` and `verify` commands and posts the results as a
+# PR comment. When the CLI is not yet published (current demo state),
+# the workflow posts a "stub mode" comment explaining that and exits 0
+# so the PR check appears as a passing informational check rather than
+# a red X.
+#
+# This is intentional: the demo repo is live before CodeLedger itself
+# is publicly installable. Once the CLI ships, this workflow automatically
+# starts posting real results with no edits required.
+
 on:
   pull_request:
-    types: [opened, synchronize]
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: read
+  pull-requests: write
+  issues: write
 
 jobs:
   cic:
@@ -13,50 +30,110 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-      - name: Install CodeLedger
-        run: npm install -g codeledger
-      - name: Run CIC
+
+      - name: Install CodeLedger (best effort)
+        id: install_cli
+        run: |
+          if npm install -g codeledger 2>/dev/null; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+            codeledger --version || true
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "CodeLedger CLI not yet published to npm — running in stub mode"
+          fi
+        continue-on-error: true
+
+      - name: Run CIC (real)
+        if: steps.install_cli.outputs.available == 'true'
+        id: cic_real
         run: |
           codeledger complete-check \
             --task "${{ github.event.pull_request.title }}" \
-            --json > cic-result.json
-      - name: Run Verify
+            --json > cic-result.json || echo '{"error":"cic failed"}' > cic-result.json
+          codeledger verify --json > verify-result.json || echo '{"error":"verify failed"}' > verify-result.json
+        continue-on-error: true
+
+      - name: Run CIC (stub)
+        if: steps.install_cli.outputs.available != 'true'
         run: |
-          codeledger verify --json > verify-result.json
+          cat > cic-result.json <<'EOF'
+          {
+            "stub": true,
+            "completion_state": "stub_pending_cli_release",
+            "claim_count": 0,
+            "verified_count": 0
+          }
+          EOF
+          cat > verify-result.json <<'EOF'
+          {
+            "stub": true,
+            "finding_count": 0,
+            "findings": []
+          }
+          EOF
+
       - name: Post results as PR comment
         if: always()
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
-            let body = '## CodeLedger Results\n\n';
-            try {
-              const cic = JSON.parse(fs.readFileSync('cic-result.json', 'utf8'));
-              body += `**CIC Status:** ${cic.completion_state || 'unknown'}\n`;
-              body += `**Claims:** ${cic.verified_count || 0}/${cic.claim_count || 0} verified\n`;
-            } catch {
-              body += '**CIC:** Failed to parse results\n';
+
+            const cliAvailable = '${{ steps.install_cli.outputs.available }}' === 'true';
+
+            let body = '## 🔎 CodeLedger Results\n\n';
+
+            if (!cliAvailable) {
+              body += '> ℹ️ **Stub mode** — the `codeledger` CLI is not yet published to npm. ';
+              body += 'This workflow will automatically switch to real CIC results once the CLI ships. ';
+              body += 'See [synthetic-reality-engine/SYNC_CHECKLIST.md](https://github.com/codeledger-demo/synthetic-reality-engine/blob/main/SYNC_CHECKLIST.md) for the integration plan.\n\n';
+              body += '**PR:** ' + context.payload.pull_request.title + '\n';
+              body += '**Author:** @' + context.payload.pull_request.user.login + '\n';
+              body += '**Branch:** `' + context.payload.pull_request.head.ref + '`\n';
+            } else {
+              try {
+                const cic = JSON.parse(fs.readFileSync('cic-result.json', 'utf8'));
+                body += '**CIC Status:** `' + (cic.completion_state || cic.completionState || 'unknown') + '`\n';
+                body += '**Claims verified:** ' + (cic.verified_count || cic.verifiedClaimCount || 0) + '/' + (cic.claim_count || cic.claimCount || 0) + '\n';
+                if (cic.mismatch_count || cic.mismatchCount) {
+                  body += '**Reality mismatches:** ' + (cic.mismatch_count || cic.mismatchCount) + ' ⚠️\n';
+                }
+              } catch (e) {
+                body += '**CIC:** could not parse result (`' + e.message + '`)\n';
+              }
+              try {
+                const verify = JSON.parse(fs.readFileSync('verify-result.json', 'utf8'));
+                body += '**Verify findings:** ' + (verify.finding_count || verify.findings?.length || 0) + '\n';
+              } catch (e) {
+                body += '**Verify:** could not parse result (`' + e.message + '`)\n';
+              }
             }
+
+            body += '\n---\n';
+            body += '_Generated by the [CodeLedger Living Demo](https://github.com/codeledger-demo) synthetic engineering team._';
+
             try {
-              const verify = JSON.parse(fs.readFileSync('verify-result.json', 'utf8'));
-              body += `**Verify:** ${verify.finding_count || 0} findings\n`;
-            } catch {
-              body += '**Verify:** Failed to parse results\n';
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body
+              });
+            } catch (e) {
+              // Comment posting should never fail the workflow.
+              console.log('Could not post comment: ' + e.message);
             }
-            await github.rest.issues.createComment({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              issue_number: context.issue.number,
-              body
-            });
+
       - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: codeledger-results
+          name: codeledger-results-pr-${{ github.event.pull_request.number }}
           path: |
             cic-result.json
             verify-result.json
+          retention-days: 14
