@@ -99,8 +99,8 @@ const isc = verify?.isc ?? verify?.intentSufficiency ?? null;
 const ccs = verify?.ccs ?? verify?.contextConfidence ?? null;
 const truthGrade = truth?.truth_grade ?? truth?.truthGrade ?? '—';
 
-const iscScore = typeof isc === 'object' ? isc.score : isc;
-const ccsScore = typeof ccs === 'object' ? ccs.score : ccs;
+const iscScore = isc != null && typeof isc === 'object' ? isc.score : isc;
+const ccsScore = ccs != null && typeof ccs === 'object' ? ccs.score : ccs;
 
 const iscStatus = (typeof iscScore === 'number' && iscScore >= 0.75) ? '✅ SUFFICIENT'
   : (typeof iscScore === 'number' && iscScore >= 0.50) ? '⚠️ WEAK' : '❌ INSUFFICIENT';
