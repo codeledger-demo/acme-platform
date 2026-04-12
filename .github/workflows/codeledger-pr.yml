@@ -29,9 +29,13 @@ jobs:
         run: |
           node .codeledger/bin/codeledger-standalone.cjs --version
 
-      - name: Initialize CodeLedger
+      - name: Initialize CodeLedger (preserve seeded state)
         run: |
-          node .codeledger/bin/codeledger-standalone.cjs init --force 2>&1 || true
+          if [ ! -f .codeledger/config.json ]; then
+            node .codeledger/bin/codeledger-standalone.cjs init --force 2>&1 || true
+          else
+            echo "CodeLedger already initialized — using seeded state"
+          fi
 
       - name: Scan repo
         run: |
