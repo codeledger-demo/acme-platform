@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "selector": {
+    "weights": {
+      "keyword": 0.30,
+      "centrality": 0.20,
+      "churn": 0.15,
+      "recent_touch": 0.10,
+      "test_relevant": 0.10,
+      "content_match": 0.10,
+      "temporal_affinity": 0.05
+    },
+    "default_budget": { "tokens": 8000, "max_files": 25 },
+    "sufficiency_threshold": 0.85,
+    "excerpt_full_file_max_lines": 200,
+    "shadow": {
+      "enabled": true,
+      "min_affinity": 0.30,
+      "min_co_commit_count": 3,
+      "max_shadow_adds": 3,
+      "tau_days": 60,
+      "commit_size_penalty": true
+    }
+  },
+  "injection": { "default_mode": "file_drop" },
+  "ambient": {
+    "auto_refresh_enabled": true,
+    "prompt_coach_enabled": true
+  }
+}

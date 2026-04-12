@@ -1,17 +1,8 @@
-name: CodeLedger PR Check
+name: CodeLedger PR Analysis
 
-# Runs on every PR opened against acme-platform.
-#
-# When the `codeledger` CLI is available on npm, this workflow runs the
-# real `complete-check` and `verify` commands and posts the results as a
-# PR comment. When the CLI is not yet published (current demo state),
-# the workflow posts a "stub mode" comment explaining that and exits 0
-# so the PR check appears as a passing informational check rather than
-# a red X.
-#
-# This is intentional: the demo repo is live before CodeLedger itself
-# is publicly installable. Once the CLI ships, this workflow automatically
-# starts posting real results with no edits required.
+# Real CodeLedger analysis on every PR.
+# Uses the vendored standalone CLI at .codeledger/bin/ — no npm install needed.
+# Each step writes JSON output, which is composed into a rich PR comment.
 
 on:
   pull_request:
@@ -20,12 +11,11 @@ on:
 permissions:
   contents: read
   pull-requests: write
-  issues: write
 
 jobs:
-  cic:
+  analyze:
     runs-on: ubuntu-latest
-    timeout-minutes: 5
+    timeout-minutes: 10
     steps:
       - uses: actions/checkout@v4
         with:
@@ -35,105 +25,112 @@ jobs:
         with:
           node-version: 22
 
-      - name: Install CodeLedger (best effort)
-        id: install_cli
+      - name: Verify vendored CLI
         run: |
-          if npm install -g codeledger 2>/dev/null; then
-            echo "available=true" >> "$GITHUB_OUTPUT"
-            codeledger --version || true
-          else
-            echo "available=false" >> "$GITHUB_OUTPUT"
-            echo "CodeLedger CLI not yet published to npm — running in stub mode"
-          fi
-        continue-on-error: true
+          node .codeledger/bin/codeledger-standalone.cjs --version
 
-      - name: Run CIC (real)
-        if: steps.install_cli.outputs.available == 'true'
-        id: cic_real
+      - name: Initialize CodeLedger
         run: |
-          codeledger complete-check \
-            --task "${{ github.event.pull_request.title }}" \
-            --json > cic-result.json || echo '{"error":"cic failed"}' > cic-result.json
-          codeledger verify --json > verify-result.json || echo '{"error":"verify failed"}' > verify-result.json
-        continue-on-error: true
+          node .codeledger/bin/codeledger-standalone.cjs init --force 2>&1 || true
 
-      - name: Run CIC (stub)
-        if: steps.install_cli.outputs.available != 'true'
+      - name: Scan repo
         run: |
-          cat > cic-result.json <<'EOF'
-          {
-            "stub": true,
-            "completion_state": "stub_pending_cli_release",
-            "claim_count": 0,
-            "verified_count": 0
-          }
-          EOF
-          cat > verify-result.json <<'EOF'
-          {
-            "stub": true,
-            "finding_count": 0,
-            "findings": []
-          }
-          EOF
+          node .codeledger/bin/codeledger-standalone.cjs scan 2>&1 || true
 
-      - name: Post results as PR comment
+      - name: Activate context bundle
+        run: |
+          node .codeledger/bin/codeledger-standalone.cjs activate \
+            --task "${{ github.event.pull_request.title }}" 2>&1 || true
+
+      - name: Run Verify
+        run: |
+          node .codeledger/bin/codeledger-standalone.cjs verify \
+            --json --explain \
+            > codeledger-verify.json 2>&1 || echo '{"error":"verify unavailable"}' > codeledger-verify.json
+
+      - name: Collect Truth Basis
+        run: |
+          node .codeledger/bin/codeledger-standalone.cjs truth \
+            --panel-json \
+            > codeledger-truth.json 2>&1 || echo '{"error":"truth unavailable"}' > codeledger-truth.json
+
+      - name: Run Explain (Phase 2)
+        run: |
+          node .codeledger/bin/codeledger-standalone.cjs explain \
+            --json --surface ci \
+            > codeledger-explain.json 2>&1 || echo '{"error":"explain unavailable"}' > codeledger-explain.json
+
+      - name: Run Next Actions (Phase 2)
+        run: |
+          node .codeledger/bin/codeledger-standalone.cjs next \
+            --json --limit 3 \
+            > codeledger-next.json 2>&1 || echo '{"error":"next unavailable"}' > codeledger-next.json
+
+      - name: Run Coach
+        run: |
+          node .codeledger/bin/codeledger-standalone.cjs coach \
+            --intent "${{ github.event.pull_request.title }}" \
+            --json \
+            > codeledger-coach.json 2>&1 || echo '{"error":"coach unavailable"}' > codeledger-coach.json
+
+      - name: Build composite PR comment
+        run: |
+          node .github/scripts/build-pr-comment.mjs \
+            --verify codeledger-verify.json \
+            --truth codeledger-truth.json \
+            --explain codeledger-explain.json \
+            --next codeledger-next.json \
+            --coach codeledger-coach.json \
+            --pr-title "${{ github.event.pull_request.title }}" \
+            --pr-author "${{ github.event.pull_request.user.login }}" \
+            --pr-branch "${{ github.event.pull_request.head.ref }}" \
+            --out codeledger-pr-body.md
+
+      - name: Post or update PR comment
         if: always()
         uses: actions/github-script@v7
         with:
           script: |
             const fs = require('fs');
+            const marker = '<!-- codeledger:pr-analysis -->';
 
-            const cliAvailable = '${{ steps.install_cli.outputs.available }}' === 'true';
-
-            let body = '## 🔎 CodeLedger Results\n\n';
-
-            if (!cliAvailable) {
-              body += '> ℹ️ **Stub mode** — the `codeledger` CLI is not yet published to npm. ';
-              body += 'This workflow will automatically switch to real CIC results once the CLI ships. ';
-              body += 'See [synthetic-reality-engine/SYNC_CHECKLIST.md](https://github.com/codeledger-demo/synthetic-reality-engine/blob/main/SYNC_CHECKLIST.md) for the integration plan.\n\n';
-              body += '**PR:** ' + context.payload.pull_request.title + '\n';
-              body += '**Author:** @' + context.payload.pull_request.user.login + '\n';
-              body += '**Branch:** `' + context.payload.pull_request.head.ref + '`\n';
-            } else {
-              try {
-                const cic = JSON.parse(fs.readFileSync('cic-result.json', 'utf8'));
-                body += '**CIC Status:** `' + (cic.completion_state || cic.completionState || 'unknown') + '`\n';
-                body += '**Claims verified:** ' + (cic.verified_count || cic.verifiedClaimCount || 0) + '/' + (cic.claim_count || cic.claimCount || 0) + '\n';
-                if (cic.mismatch_count || cic.mismatchCount) {
-                  body += '**Reality mismatches:** ' + (cic.mismatch_count || cic.mismatchCount) + ' ⚠️\n';
-                }
-              } catch (e) {
-                body += '**CIC:** could not parse result (`' + e.message + '`)\n';
-              }
-              try {
-                const verify = JSON.parse(fs.readFileSync('verify-result.json', 'utf8'));
-                body += '**Verify findings:** ' + (verify.finding_count || verify.findings?.length || 0) + '\n';
-              } catch (e) {
-                body += '**Verify:** could not parse result (`' + e.message + '`)\n';
-              }
+            let body;
+            try {
+              body = fs.readFileSync('codeledger-pr-body.md', 'utf8');
+            } catch {
+              body = marker + '\n## 🔎 CodeLedger PR Analysis\n\n> Analysis artifacts were not generated. Check the workflow logs.\n';
             }
 
-            body += '\n---\n';
-            body += '_Generated by the [CodeLedger Living Demo](https://github.com/codeledger-demo) synthetic engineering team._';
+            // Find existing comment to update (dedup)
+            const { data: comments } = await github.rest.issues.listComments({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              per_page: 100,
+            });
 
-            try {
+            const existing = comments.find(c => c.body && c.body.includes(marker));
+
+            if (existing) {
+              await github.rest.issues.updateComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                comment_id: existing.id,
+                body,
+              });
+            } else {
               await github.rest.issues.createComment({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
-                body
+                body,
               });
-            } catch (e) {
-              // Comment posting should never fail the workflow.
-              console.log('Could not post comment: ' + e.message);
             }
 
       - name: Upload artifacts
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: codeledger-results-pr-${{ github.event.pull_request.number }}
-          path: |
-            cic-result.json
-            verify-result.json
-          retention-days: 14
+          name: codeledger-analysis-pr-${{ github.event.pull_request.number }}
+          path: codeledger-*.json
+          retention-days: 30

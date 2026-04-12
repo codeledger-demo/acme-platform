@@ -1,0 +1,46 @@
+{
+  "version": 1,
+  "repoId": "acme-platform",
+  "rules": [
+    {
+      "id": "eg-001",
+      "domain": "auth",
+      "rule": "Changes to JWT verification require observed evidence (passing integration tests with real token flows)",
+      "tier": "observed",
+      "paths": ["services/auth/middleware/jwt-verify.ts", "services/auth/middleware/session.ts"],
+      "rationale": "Auth failures are P0 incidents — likely evidence is insufficient"
+    },
+    {
+      "id": "eg-002",
+      "domain": "billing",
+      "rule": "Changes to subscription renewal or Stripe handlers require at least likely evidence (unit tests covering happy path + error cases)",
+      "tier": "likely",
+      "paths": ["services/billing/subscriptions/", "services/billing/webhooks/stripe-handler.ts"],
+      "rationale": "Financial operations need strong test coverage before merge"
+    },
+    {
+      "id": "eg-003",
+      "domain": "shared",
+      "rule": "Changes to shared-utils or validation package require observed evidence (all downstream consumers tested)",
+      "tier": "observed",
+      "paths": ["packages/shared-utils/", "packages/validation/"],
+      "rationale": "Shared packages have blast radius across all services"
+    },
+    {
+      "id": "eg-004",
+      "domain": "notifications",
+      "rule": "Changes to notification queue require likely evidence (queue processor tests with mock channels)",
+      "tier": "likely",
+      "paths": ["services/notifications/queue/"],
+      "rationale": "Queue failures cause silent notification drops"
+    },
+    {
+      "id": "eg-005",
+      "domain": "webhooks",
+      "rule": "Changes to webhook retry logic require possible evidence minimum (at least one test showing retry behavior)",
+      "tier": "possible",
+      "paths": ["services/webhooks/dispatcher/retry.ts"],
+      "rationale": "Retry changes affect all outbound webhook delivery"
+    }
+  ]
+}

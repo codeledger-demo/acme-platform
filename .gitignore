@@ -2,6 +2,9 @@ node_modules/
 dist/
 .next/
 .codeledger/
+!.codeledger/
+!.codeledger/bin/
+!.codeledger/bin/**
 .claude/
 .env
 .env.local

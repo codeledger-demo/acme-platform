@@ -1,0 +1,44 @@
+{
+  "version": 1,
+  "repoId": "acme-platform",
+  "neighborhoods": [
+    {
+      "anchor": "services/auth/middleware/jwt-verify.ts",
+      "neighbors": [
+        "services/auth/middleware/index.ts",
+        "services/auth/routes/login.ts",
+        "services/auth/routes/refresh.ts",
+        "packages/shared-utils/src/errors.ts",
+        "packages/validation/src/user.ts"
+      ],
+      "immutable_wires": [
+        { "from": "services/auth/middleware/jwt-verify.ts", "to": "packages/shared-utils/src/errors.ts", "reason": "JWT errors must use shared error types" },
+        { "from": "services/auth/routes/login.ts", "to": "services/auth/middleware/jwt-verify.ts", "reason": "Login route must use centralized JWT verification" }
+      ]
+    },
+    {
+      "anchor": "services/billing/subscriptions/renewal.ts",
+      "neighbors": [
+        "services/billing/webhooks/stripe-handler.ts",
+        "services/billing/models/subscription.ts",
+        "packages/validation/src/billing.ts",
+        "packages/api-client/src/stripe.ts"
+      ],
+      "immutable_wires": [
+        { "from": "services/billing/subscriptions/renewal.ts", "to": "packages/validation/src/billing.ts", "reason": "All billing input must be validated through shared validators" }
+      ]
+    },
+    {
+      "anchor": "services/webhooks/dispatcher/index.ts",
+      "neighbors": [
+        "services/webhooks/dispatcher/retry.ts",
+        "services/webhooks/delivery/tracker.ts",
+        "packages/shared-utils/src/retry.ts",
+        "packages/shared-utils/src/logger.ts"
+      ],
+      "immutable_wires": [
+        { "from": "services/webhooks/dispatcher/retry.ts", "to": "packages/shared-utils/src/retry.ts", "reason": "Webhook retry must use shared retry utility for consistency" }
+      ]
+    }
+  ]
+}

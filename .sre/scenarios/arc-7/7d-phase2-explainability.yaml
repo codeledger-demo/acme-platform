@@ -1,0 +1,129 @@
+# Arc 7D: Phase 2 Explainability — Post-Incident Intelligence
+# After Priya's auth incident fix, explain/learnings/next provide
+# deterministic post-mortem intelligence.
+
+scenario:
+  id: arc-7d-phase2-explainability
+  name: "Phase 2 Explainability — Post-Incident Intelligence"
+  arc: 7
+  sub_arc: D
+  description: >
+    After the auth incident from Arc 3 is resolved, the Phase 2 explainability
+    system provides deterministic post-mortem analysis. Explain shows WHY it
+    happened, learnings show the PATTERN, and next recommends ACTIONS. All
+    output is evidence-cited — no LLM synthesis.
+
+  actors:
+    - id: priya
+      github_user: priya-k-acme
+      role: junior
+
+  prerequisites:
+    - arc_3_completed: true
+      description: "The auth incident from Arc 3 must have occurred"
+
+  steps:
+    # Priya submits her incident fix
+    - action: create_branch
+      actor: priya
+      branch: fix/auth-incident-recovery
+      from: main
+
+    - action: commit
+      actor: priya
+      branch: fix/auth-incident-recovery
+      message: "fix(auth): restore JWT verification after incident"
+      files:
+        - path: services/auth/middleware/jwt-verify.ts
+          template: auth-middleware
+          traits: [runtime_validation, shared_error_types, full_test_coverage]
+        - path: services/auth/middleware/__tests__/jwt-verify.test.ts
+          template: auth-test
+          traits: [integration_test, real_token_flows]
+
+    - action: open_pr
+      actor: priya
+      branch: fix/auth-incident-recovery
+      title: "fix(auth): restore JWT verification after incident"
+      body: >
+        Fixes the auth middleware that was broken during the AI-assisted
+        refactor. Restores proper JWT verification with full test coverage.
+        Reviewed with Sara before submission.
+      labels: [auth, incident-fix, security]
+
+    - action: await_workflow
+      workflow: codeledger-pr.yml
+      expected_status: pass
+
+    - action: merge_pr
+      actor: priya
+      branch: fix/auth-incident-recovery
+
+    # Run Phase 2 explainability commands
+    - action: run_codeledger
+      command: "explain --json --surface markdown"
+      capture:
+        - name: explain_output
+          description: "ExplainModel: WHY the incident occurred"
+      expected_output:
+        outcome_status: "PASS"
+        why_includes:
+          - "ghost file not imported"
+          - "runtime validation missing"
+          - "prior ECL failures in auth domain"
+
+    - action: run_codeledger
+      command: "learnings --json --surface markdown --limit 5"
+      capture:
+        - name: learnings_output
+          description: "LearningsModel: recurring patterns from ECL history"
+      expected_output:
+        patterns_include:
+          - name: "auth-middleware-failure"
+            occurrences: 3
+            trend: "improving"
+          - name: "missing-runtime-validation"
+            occurrences: 4
+            trend: "stable"
+
+    - action: run_codeledger
+      command: "next --json --surface markdown --limit 3"
+      capture:
+        - name: next_output
+          description: "NextModel: recommended actions ranked by confidence"
+      expected_output:
+        actions_include:
+          - title: "Add evidence gate for auth middleware changes"
+            confidence_min: 0.85
+          - title: "Pair review requirement for junior auth PRs"
+            confidence_min: 0.75
+          - title: "Update golden pattern GP-001 with incident learnings"
+            confidence_min: 0.68
+
+    # Post combined output as GitHub issue
+    - action: create_issue
+      title: "Post-Incident Intelligence Report: Auth Middleware (Arc 3)"
+      body_template: phase2-post-incident
+      data:
+        explain: explain_output
+        learnings: learnings_output
+        next: next_output
+      labels: [incident-report, intelligence]
+
+  expected_signals:
+    explain_produced: true
+    learnings_pattern_count: 2
+    next_action_count: 3
+    issue_created: true
+    all_evidence_cited: true
+
+  narrative:
+    headline: "Deterministic post-mortem: why it happened, what repeats, what to do"
+    detail: >
+      This is the Phase 2 explainability showcase. After Priya's incident
+      fix merges, three commands produce a complete post-mortem without
+      any LLM involvement. Explain cites specific ECL entries and verify
+      findings. Learnings shows that auth-middleware-failure has occurred
+      3 times with an improving trend. Next recommends adding evidence
+      gates and pair review — with confidence scores based on historical
+      effectiveness.

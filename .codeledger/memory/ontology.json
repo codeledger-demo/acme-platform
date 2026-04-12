@@ -1,0 +1,36 @@
+{
+  "version": 1,
+  "repoId": "acme-platform",
+  "concepts": [
+    {
+      "term": "payment",
+      "aliases": ["billing", "charge", "invoice", "subscription"],
+      "disambiguation": "In this repo, 'payment' refers to the Stripe-backed billing service at services/billing/. 'Invoice' is a specific billing artifact, not a separate system.",
+      "canonical_path": "services/billing/"
+    },
+    {
+      "term": "auth",
+      "aliases": ["authentication", "login", "session", "jwt", "token"],
+      "disambiguation": "'Auth' covers JWT verification, session management, OAuth, and password reset — all in services/auth/. 'Session' is a subset of auth, not a separate concept.",
+      "canonical_path": "services/auth/"
+    },
+    {
+      "term": "notification",
+      "aliases": ["alert", "email", "slack", "push"],
+      "disambiguation": "'Notification' is the unified multi-channel delivery system at services/notifications/. Individual channels (email, Slack, in-app) are delivery backends, not separate systems.",
+      "canonical_path": "services/notifications/"
+    },
+    {
+      "term": "webhook",
+      "aliases": ["callback", "hook", "event delivery"],
+      "disambiguation": "'Webhook' in this repo is the outbound event delivery system at services/webhooks/. Inbound webhooks from Stripe are handled by services/billing/webhooks/.",
+      "canonical_path": "services/webhooks/"
+    },
+    {
+      "term": "validator",
+      "aliases": ["validation", "schema", "type guard", "runtime check"],
+      "disambiguation": "All runtime validation MUST go through packages/validation/ per ADR-007. Do not create inline validators in service files.",
+      "canonical_path": "packages/validation/"
+    }
+  ]
+}

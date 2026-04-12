@@ -1,0 +1,127 @@
+# Arc 7A: Golden Patterns — Sara's Pattern Promotion
+# Sara completes a clean payment integration. Her high-confidence ECL entry
+# triggers golden pattern extraction. When Marcus starts a similar task,
+# the coach references Sara's validated pattern.
+
+scenario:
+  id: arc-7a-golden-patterns
+  name: "Golden Patterns — Pattern Promotion"
+  arc: 7
+  sub_arc: A
+  description: >
+    Demonstrates how validated engineering patterns compound across the team.
+    Sara's consistently successful payment processing approach becomes a
+    golden pattern that guides Marcus on a similar task.
+
+  actors:
+    - id: sara
+      github_user: sara-chen-acme
+      role: senior
+    - id: marcus
+      github_user: marcus-webb-acme
+      role: mid
+
+  steps:
+    # Sara completes a clean payment task
+    - action: create_branch
+      actor: sara
+      branch: feat/payment-method-update
+      from: main
+
+    - action: commit
+      actor: sara
+      branch: feat/payment-method-update
+      message: "feat(billing): add payment method update flow with validation"
+      files:
+        - path: services/billing/routes/payment-method.ts
+          template: billing-route-handler
+          traits: [runtime_validation, shared_error_types, service_delegation]
+        - path: services/billing/services/payment-method.ts
+          template: billing-service
+          traits: [stripe_integration, idempotent_operation]
+        - path: services/billing/routes/__tests__/payment-method.test.ts
+          template: route-test
+          traits: [full_coverage, mock_stripe]
+
+    - action: open_pr
+      actor: sara
+      branch: feat/payment-method-update
+      title: "feat(billing): payment method update flow"
+      body: >
+        Adds the ability for customers to update their payment method.
+        Uses the shared validation package per ADR-007, routes through
+        centralized error handling, delegates to service layer.
+      labels: [billing, feature]
+
+    # CodeLedger analyzes Sara's PR — expect PASS
+    - action: await_workflow
+      workflow: codeledger-pr.yml
+      expected_status: pass
+      capture:
+        - name: sara_cic_result
+          artifact: codeledger-verify.json
+        - name: sara_ecl_entry
+          description: "ECL records success with high confidence"
+
+    - action: merge_pr
+      actor: sara
+      branch: feat/payment-method-update
+
+    # Golden pattern extraction happens via ECL
+    - action: run_codeledger
+      command: "memory seed-patterns"
+      capture:
+        - name: golden_patterns
+          description: "New GP extracted from Sara's payment method pattern"
+
+    # Marcus starts a similar task the next day
+    - action: wait
+      duration: 1d
+
+    - action: create_branch
+      actor: marcus
+      branch: feat/payment-history-export
+      from: main
+
+    - action: commit
+      actor: marcus
+      branch: feat/payment-history-export
+      message: "feat(billing): add payment history export endpoint"
+      files:
+        - path: services/billing/routes/payment-history.ts
+          template: billing-route-handler
+          traits: [partial_validation]
+        - path: services/billing/services/payment-export.ts
+          template: billing-service
+          traits: [stripe_integration]
+
+    - action: open_pr
+      actor: marcus
+      branch: feat/payment-history-export
+      title: "feat(billing): payment history export"
+      body: "Adds endpoint for customers to export payment history as CSV."
+      labels: [billing, feature]
+
+    # CodeLedger analyzes Marcus's PR — expect WARN with golden pattern reference
+    - action: await_workflow
+      workflow: codeledger-pr.yml
+      expected_status: warn
+      capture:
+        - name: marcus_coach_output
+          description: "Coach references Sara's golden pattern GP-004"
+        - name: marcus_next_actions
+          description: "Next actions suggest following Sara's validated pattern"
+
+  expected_signals:
+    golden_pattern_promoted: true
+    coach_references_pattern: "GP-004"
+    marcus_cic_warns: ["runtime_validation"]
+    pattern_reuse_demonstrated: true
+
+  narrative:
+    headline: "Sara's patterns become the team's north star"
+    detail: >
+      This scenario shows CodeLedger's compounding learning: Sara's
+      consistently clean billing PRs create golden patterns that are
+      automatically surfaced when Marcus works on similar tasks. The
+      coach doesn't just flag issues — it shows the proven way to do it.

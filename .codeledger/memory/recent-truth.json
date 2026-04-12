@@ -1,0 +1,61 @@
+{
+  "version": 1,
+  "repoId": "acme-platform",
+  "entries": [
+    {
+      "id": "rt-001",
+      "type": "accepted_change",
+      "title": "Auth middleware JWT verification refactor",
+      "description": "Replaced legacy JWT verification with centralized middleware pattern",
+      "author": "sara-chen-acme",
+      "timestamp": "2026-04-08T10:30:00Z",
+      "ttl_days": 30,
+      "files": ["services/auth/middleware/jwt-verify.ts", "services/auth/middleware/index.ts"],
+      "tags": ["auth", "security", "middleware"]
+    },
+    {
+      "id": "rt-002",
+      "type": "accepted_change",
+      "title": "Billing subscription renewal flow",
+      "description": "Added automatic subscription renewal with Stripe webhook handling",
+      "author": "marcus-webb-acme",
+      "timestamp": "2026-04-09T14:15:00Z",
+      "ttl_days": 30,
+      "files": ["services/billing/subscriptions/renewal.ts", "services/billing/webhooks/stripe-handler.ts"],
+      "tags": ["billing", "stripe", "subscriptions"]
+    },
+    {
+      "id": "rt-003",
+      "type": "feature",
+      "title": "Notification queue with dead letter handling",
+      "description": "Implemented notification queue with retry logic and DLQ for failed deliveries",
+      "author": "priya-k-acme",
+      "timestamp": "2026-04-10T09:45:00Z",
+      "ttl_days": 30,
+      "files": ["services/notifications/queue/processor.ts", "services/notifications/queue/dead-letter.ts"],
+      "tags": ["notifications", "queue", "reliability"]
+    },
+    {
+      "id": "rt-004",
+      "type": "adr",
+      "title": "ADR-007: Centralize all runtime validation in packages/validation",
+      "description": "All runtime type checking must use the shared validation package, not inline checks",
+      "author": "sara-chen-acme",
+      "timestamp": "2026-04-07T16:00:00Z",
+      "ttl_days": 90,
+      "files": ["packages/validation/index.ts"],
+      "tags": ["architecture", "validation", "adr"]
+    },
+    {
+      "id": "rt-005",
+      "type": "accepted_change",
+      "title": "Webhook retry with exponential backoff",
+      "description": "Replaced fixed-delay retry with exponential backoff and jitter",
+      "author": "marcus-webb-acme",
+      "timestamp": "2026-04-10T11:30:00Z",
+      "ttl_days": 30,
+      "files": ["services/webhooks/dispatcher/retry.ts", "services/webhooks/dispatcher/index.ts"],
+      "tags": ["webhooks", "reliability", "retry"]
+    }
+  ]
+}

@@ -1,0 +1,66 @@
+{
+  "version": 1,
+  "repoId": "acme-platform",
+  "patterns": [
+    {
+      "id": "GP-001",
+      "label": "Auth Middleware Pattern",
+      "description": "Centralized JWT verification with error propagation through shared error types",
+      "source": "ecl_success",
+      "author": "sara-chen-acme",
+      "confidence": 0.95,
+      "verifications": 3,
+      "keywords": ["auth", "jwt", "middleware", "verification"],
+      "typicalFiles": ["services/auth/middleware/jwt-verify.ts", "packages/shared-utils/src/errors.ts"],
+      "extractedFrom": "ECL entry #089 — Sara's auth middleware refactor, 3x verified, 0 failures"
+    },
+    {
+      "id": "GP-002",
+      "label": "Stripe Webhook Handler Pattern",
+      "description": "Idempotent webhook processing with event deduplication and ordered handling",
+      "source": "ecl_success",
+      "author": "sara-chen-acme",
+      "confidence": 0.91,
+      "verifications": 2,
+      "keywords": ["billing", "stripe", "webhook", "idempotent"],
+      "typicalFiles": ["services/billing/webhooks/stripe-handler.ts", "services/billing/models/subscription.ts"],
+      "extractedFrom": "ECL entry #112 — Sara's Stripe handler, 2x verified, 0 failures"
+    },
+    {
+      "id": "GP-003",
+      "label": "Shared Validation Pattern",
+      "description": "Runtime validation through packages/validation with domain-specific validators per ADR-007",
+      "source": "ecl_success",
+      "author": "sara-chen-acme",
+      "confidence": 0.93,
+      "verifications": 5,
+      "keywords": ["validation", "runtime", "type guard", "schema"],
+      "typicalFiles": ["packages/validation/src/billing.ts", "packages/validation/src/user.ts", "packages/validation/src/webhook.ts"],
+      "extractedFrom": "ECL entry #078 — ADR-007 enforcement, 5x verified across all services"
+    },
+    {
+      "id": "GP-004",
+      "label": "Service Route Handler Pattern",
+      "description": "Route handlers validate input at boundary, use shared error types, and delegate to service layer",
+      "source": "ecl_success",
+      "author": "sara-chen-acme",
+      "confidence": 0.89,
+      "verifications": 4,
+      "keywords": ["route", "handler", "api", "endpoint", "validation"],
+      "typicalFiles": ["services/auth/routes/login.ts", "services/billing/routes/subscription.ts"],
+      "extractedFrom": "ECL entry #095 — Consistent route handler pattern, 4x verified"
+    },
+    {
+      "id": "GP-005",
+      "label": "Retry with Backoff Pattern",
+      "description": "Exponential backoff with jitter using packages/shared-utils/retry.ts",
+      "source": "ecl_success",
+      "author": "marcus-webb-acme",
+      "confidence": 0.85,
+      "verifications": 2,
+      "keywords": ["retry", "backoff", "jitter", "reliability"],
+      "typicalFiles": ["packages/shared-utils/src/retry.ts", "services/webhooks/dispatcher/retry.ts"],
+      "extractedFrom": "ECL entry #145 — Marcus's retry refactor, 2x verified"
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+# Arc 7C: Truth Control Plane — Continuous Truth Loop
+# Truth grade progresses C→B→A through a release cycle as evidence accumulates.
+
+scenario:
+  id: arc-7c-truth-control-plane
+  name: "Truth Control Plane — Continuous Truth Loop"
+  arc: 7
+  sub_arc: C
+  description: >
+    Demonstrates the continuous truth assessment system. As Sara prepares
+    a release, the truth grade starts at C (stale state) and progressively
+    improves to A as evidence accumulates: fresh remote, CI passing, clean
+    worktree. Each state transition emits a truth event with full evidence.
+
+  actors:
+    - id: sara
+      github_user: sara-chen-acme
+      role: senior
+
+  steps:
+    # Start: local-only changes, stale fetch
+    - action: create_branch
+      actor: sara
+      branch: release/v2.4.1
+      from: main
+
+    - action: commit
+      actor: sara
+      branch: release/v2.4.1
+      message: "release: prepare v2.4.1"
+      files:
+        - path: package.json
+          template: version-bump
+          traits: [version_2_4_1]
+
+    # Truth snapshot 1: Grade C (stale fetch, no CI)
+    - action: run_codeledger
+      command: "truth --panel-json"
+      capture:
+        - name: truth_grade_c
+          description: "Truth Grade C — stale remote, no CI evidence"
+      expected_output:
+        truth_grade: "C"
+        remote_freshness: "STALE"
+        ci_evidence: "ABSENT"
+
+    # Push to remote
+    - action: push_branch
+      actor: sara
+      branch: release/v2.4.1
+
+    # Truth snapshot 2: Grade B (fresh remote, no CI yet)
+    - action: run_codeledger
+      command: "truth --panel-json"
+      capture:
+        - name: truth_grade_b
+          description: "Truth Grade B — fresh remote, CI pending"
+      expected_output:
+        truth_grade: "B"
+        remote_freshness: "FRESH"
+        ci_evidence: "ABSENT"
+
+    # Open PR, CI runs
+    - action: open_pr
+      actor: sara
+      branch: release/v2.4.1
+      title: "release: v2.4.1"
+      body: "Release preparation — all features verified, clean release."
+      labels: [release]
+
+    - action: await_workflow
+      workflow: ci.yml
+      expected_status: pass
+
+    # Truth snapshot 3: Grade A (fresh remote, CI present, clean worktree)
+    - action: run_codeledger
+      command: "truth --panel-json"
+      capture:
+        - name: truth_grade_a
+          description: "Truth Grade A — FRESH remote, CI present, clean worktree"
+      expected_output:
+        truth_grade: "A"
+        remote_freshness: "FRESH"
+        ci_evidence: "PRESENT"
+
+    # Emit release truth event
+    - action: run_codeledger
+      command: "release-truth --commit HEAD --json"
+      capture:
+        - name: release_truth_event
+          description: "Release truth event with full evidence chain"
+
+    # Post truth timeline as PR comment
+    - action: comment_pr
+      actor: sara
+      body_template: truth-timeline
+      data:
+        snapshots: [truth_grade_c, truth_grade_b, truth_grade_a]
+        release_event: release_truth_event
+
+    - action: merge_pr
+      actor: sara
+      branch: release/v2.4.1
+
+  expected_signals:
+    truth_progression: ["C", "B", "A"]
+    release_truth_emitted: true
+    evidence_chain_complete: true
+
+  narrative:
+    headline: "Truth grade climbs from C to A as evidence accumulates"
+    detail: >
+      This scenario shows the Truth Control Plane in action. Truth isn't
+      binary — it's a continuous assessment. Sara's release starts with
+      Grade C (stale state), improves to B when pushed, and reaches A
+      when CI passes. Every transition is a verifiable event. The release
+      truth event captures the full evidence chain for audit.
