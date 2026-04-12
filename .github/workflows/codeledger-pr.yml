@@ -74,6 +74,7 @@ jobs:
             > codeledger-coach.json 2>&1 || echo '{"error":"coach unavailable"}' > codeledger-coach.json
 
       - name: Build composite PR comment
+        continue-on-error: true
         run: |
           node .github/scripts/build-pr-comment.mjs \
             --verify codeledger-verify.json \
