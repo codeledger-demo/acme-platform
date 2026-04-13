@@ -73,20 +73,21 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 > This is a synthetic demonstration repository operated by CodeLedger.
 
-**Current Arc:** The Sprint Squeeze (Arc 2)
-**Team Health:** 🟡 80/100
-**Last Activity:** 2h ago
+**Current Arc:** Feature Showcase (Arc 7)
+**Team Health:** 🟢 85/100
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **📋 Ghost file detected — AI-generated helper never imported** *(2h ago, priya-k)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(1h ago, sara-chen)*
+- **📋 Ghost file detected — AI-generated helper never imported** *(4h ago, priya-k)*
 - **📋 Q4 sprint begins — checkout feature on tight deadline** *(5 days ago, marcus-webb)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
-| Sara Chen | 0% | 0 | — |
+| Sara Chen | 0% | 1 | — |
 | Marcus Webb | 0% | 1 | — |
 | Priya K | 0% | 1 | — |
 
