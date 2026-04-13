@@ -75,12 +75,12 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟢 85/100
-**Last Activity:** 1h ago
+**Last Activity:** 3h ago
 
 ### Recent Headlines
 
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(1h ago, sara-chen)*
-- **📋 Ghost file detected — AI-generated helper never imported** *(4h ago, priya-k)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(3h ago, sara-chen)*
+- **📋 Ghost file detected — AI-generated helper never imported** *(6h ago, priya-k)*
 - **📋 Q4 sprint begins — checkout feature on tight deadline** *(5 days ago, marcus-webb)*
 
 ### Developer Scorecards
