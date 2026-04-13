@@ -75,11 +75,12 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** The Sprint Squeeze (Arc 2)
 **Team Health:** 🟡 80/100
-**Last Activity:** 2 days ago
+**Last Activity:** just now
 
 ### Recent Headlines
 
-- **📋 Q4 sprint begins — checkout feature on tight deadline** *(2 days ago, marcus-webb)*
+- **📋 Ghost file detected — AI-generated helper never imported** *(just now, priya-k)*
+- **📋 Q4 sprint begins — checkout feature on tight deadline** *(5 days ago, marcus-webb)*
 
 ### Developer Scorecards
 
@@ -87,7 +88,7 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 0 | — |
 | Marcus Webb | 0% | 1 | — |
-| Priya K | 0% | 0 | — |
+| Priya K | 0% | 1 | — |
 
 ![Team Health](.github/badges/health.svg)
 
