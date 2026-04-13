@@ -75,11 +75,11 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** The Sprint Squeeze (Arc 2)
 **Team Health:** 🟡 80/100
-**Last Activity:** just now
+**Last Activity:** 2h ago
 
 ### Recent Headlines
 
-- **📋 Ghost file detected — AI-generated helper never imported** *(just now, priya-k)*
+- **📋 Ghost file detected — AI-generated helper never imported** *(2h ago, priya-k)*
 - **📋 Q4 sprint begins — checkout feature on tight deadline** *(5 days ago, marcus-webb)*
 
 ### Developer Scorecards
