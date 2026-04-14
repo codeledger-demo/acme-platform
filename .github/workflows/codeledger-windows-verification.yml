@@ -158,3 +158,4 @@ jobs:
           echo "Node: $(node --version)"
           echo "OS: $env:RUNNER_OS"
           echo "Arch: $env:PROCESSOR_ARCHITECTURE"
+# Windows verification trigger
