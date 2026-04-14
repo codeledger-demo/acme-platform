@@ -1,5 +1,22 @@
 # Welcome to the CodeLedger Living Demo
 
+---
+
+> **What problem are we solving?**
+>
+> **The Problem** — AI coding agents waste 40–60% of their context window on irrelevant files. Every session starts cold. Institutional knowledge lives in people's heads and disappears when they leave. There is no risk signal before a merge.
+>
+> **The Solution** — CodeLedger is a deterministic context control plane for software development. It scores every file in a repository, selects only what the current task requires, captures outcomes, and promotes successful patterns into reusable institutional memory.
+>
+> **The Intelligence Layer** — The Task Intelligence Engine does not start from zero. It is seeded from day one with a curated ontology pack of golden patterns — distilled from peer organizations and leading engineering teams at organizations including Google, SAP, and Salesforce. As your team uses CodeLedger, your own earned patterns layer on top, making the system progressively more tailored to your codebase, your conventions, and your standards.
+>
+> **The Principle** — No cloud. No training pipeline. No behavior change required. Engineering management installs it once. Every developer and every AI agent benefits automatically — from collective intelligence on day one, and from your own institutional memory from day two onward.
+>
+> *Logs are history. Ledger is intelligence.*
+
+---
+
+
 > **You're looking at a real, running engineering team.** Not a deck. Not a video. Not a sandbox with canned data. This is a repository with 10+ months of git history, a CI pipeline, and three developers who open PRs every weekday — and CodeLedger has been watching all of it.
 >
 > It takes ~10 minutes to understand what CodeLedger does by looking at this. Here's the tour.
@@ -60,7 +77,7 @@ Read the CIC output in the PR comment. That's the core product in one PR.
 
 ### Minute 5 — Open a PR comment (new style)
 
-Open any recent PR and look at the **CodeLedger PR Analysis** comment. The v0.10.8 comment format has these sections:
+Open any recent PR and look at the **CodeLedger PR Analysis** comment. The v0.10.10 comment format has these sections:
 
 1. **Context Certification** — ISC (Intent Sufficiency) and CCS (Context Confidence) as visual score bars, plus a Truth Grade (A–F)
 2. **Top Findings** — severity-ranked table with module and evidence-cited description
@@ -192,7 +209,7 @@ This repository is part of a public demonstration system. To be fully clear:
 - **All commits are synthetic** — produced by the Synthetic Reality Engine simulator (repo: `codeledger-demo/synthetic-reality-engine`, private) running on GitHub Actions.
 - **Sara, Marcus, and Priya are bot accounts** — they use illustrative avatars, not photos of real people.
 - **No real customer data** appears anywhere in this system.
-- **CodeLedger output in PR comments is real** — it comes from running the actual `codeledger` CLI (v0.10.8, vendored at `.codeledger/bin/`) against this repo in CI.
+- **CodeLedger output in PR comments is real** — it comes from running the actual `codeledger` CLI (v0.10.10, vendored at `.codeledger/bin/`) against this repo in CI.
 - **The dashboard** at `demo.codeledger.dev` renders from deterministic fixtures in demo mode, or from real data when connected to a live PostgreSQL instance. The UI is the same either way.
 
 ---
