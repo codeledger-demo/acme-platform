@@ -18,9 +18,9 @@ jobs:
       - name: Info
         shell: cmd
         run: node -e "console.log('platform:',process.platform,'arch:',process.arch,'node:',process.version)"
-      - name: Init
+      - name: Init (skip --force to preserve patched standalone)
         shell: cmd
-        run: node .codeledger/bin/codeledger-standalone.cjs init --force && echo INIT PASS
+        run: node .codeledger/bin/codeledger-standalone.cjs init && echo INIT PASS
       - name: Scan
         shell: cmd
         run: node .codeledger/bin/codeledger-standalone.cjs scan && echo SCAN PASS
