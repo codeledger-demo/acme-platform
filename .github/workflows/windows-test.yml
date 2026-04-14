@@ -1,0 +1,49 @@
+name: Windows Test
+on:
+  workflow_dispatch:
+jobs:
+  verify:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Install
+        shell: cmd
+        run: npm install -g pnpm@9 codeledger@latest
+      - name: Setup
+        shell: cmd
+        run: pnpm install --no-frozen-lockfile
+      - name: Info
+        shell: cmd
+        run: node -e "console.log('platform:',process.platform,'arch:',process.arch,'node:',process.version)"
+      - name: Init
+        shell: cmd
+        run: npx codeledger init --force && echo INIT PASS
+      - name: Scan
+        shell: cmd
+        run: npx codeledger scan && echo SCAN PASS
+      - name: Activate
+        shell: cmd
+        run: npx codeledger activate --task "Fix auth middleware in packages/api" --quiet && echo ACTIVATE PASS
+      - name: Bundle
+        shell: cmd
+        run: npx codeledger bundle --task "Add error handling" --json > /dev/null 2>&1 && echo BUNDLE PASS
+      - name: Summary
+        shell: cmd
+        run: npx codeledger session-summary && echo SUMMARY PASS
+      - name: SQLite
+        shell: cmd
+        run: node -e "var d=require('better-sqlite3')(':memory:');d.exec('CREATE TABLE t(v TEXT)');d.prepare('INSERT INTO t VALUES(?)').run('win');console.log(d.prepare('SELECT * FROM t').get().v);d.close();console.log('SQLITE PASS')"
+      - name: CRLF
+        shell: cmd
+        run: node -e "var fs=require('fs'),p='.codeledger\\crlf.jsonl';fs.writeFileSync(p,'{\"a\":1}\r\n{\"b\":2}\r\n');var l=fs.readFileSync(p,'utf8').trim().split(/\r?\n/);console.log(l.length===2?'CRLF PASS':'CRLF FAIL');fs.unlinkSync(p)"
+      - name: Idempotent
+        shell: cmd
+        run: npx codeledger init && echo IDEMPOTENT PASS
+      - name: Done
+        if: always()
+        shell: cmd
+        run: echo Windows verification complete
