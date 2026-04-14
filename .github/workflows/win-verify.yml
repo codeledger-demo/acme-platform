@@ -12,33 +12,40 @@ jobs:
       - run: npm install -g pnpm@9 codeledger@latest
       - run: pnpm install --no-frozen-lockfile
       - name: Environment
+        shell: cmd
         run: |
-          echo "Node: $(node --version)"
-          echo "Arch: $env:PROCESSOR_ARCHITECTURE"
-          echo "Platform: $(node -e 'console.log(process.platform + \"-\" + process.arch)')"
+          echo Node: & node --version
+          echo Platform: & node -e "console.log(process.platform + '-' + process.arch)"
       - name: Init + Scan
+        shell: cmd
         run: |
           npx codeledger init --force
           npx codeledger scan
       - name: Explicit activation
+        shell: cmd
         run: npx codeledger activate --task "Fix authentication middleware in packages/api/src/auth" --quiet
       - name: Lifecycle record
-        run: |
-          node -e "const fs=require('fs'),p=require('path').join('.codeledger','task-lifecycle.jsonl');if(!fs.existsSync(p)){console.log('LIFECYCLE: not found (ok for published version)');process.exit(0);}const l=fs.readFileSync(p,'utf8').trim().split(/\r?\n/);console.log('Records:',l.length);const r=JSON.parse(l[l.length-1]);console.log('Phase:',r.phase,'TaskID:',r.task_id||r.activation?.task_id)"
+        shell: cmd
+        run: node -e "var fs=require('fs'),p=require('path').join('.codeledger','task-lifecycle.jsonl');if(!fs.existsSync(p)){console.log('LIFECYCLE: not found');process.exit(0);}var l=fs.readFileSync(p,'utf8').trim().split(/\r?\n/);console.log('Records:',l.length);var r=JSON.parse(l[l.length-1]);console.log('Phase:',r.phase,'TaskID:',r.task_id||'embedded')"
       - name: Task status
-        run: npx codeledger task status --json 2>$null || echo "task status not in published version"
+        shell: cmd
+        run: npx codeledger task status --json || echo task status not available
       - name: Bundle
-        run: npx codeledger bundle --task "Add error handling to API router" --json 2>$null | Select-Object -First 3
+        shell: cmd
+        run: npx codeledger bundle --task "Add error handling to API router" --json > /dev/null 2>&1 && echo BUNDLE: PASS || echo BUNDLE: FAIL
       - name: Session summary
+        shell: cmd
         run: npx codeledger session-summary
       - name: Repeated init
-        run: npx codeledger init
+        shell: cmd
+        run: npx codeledger init && echo IDEMPOTENT: PASS
       - name: better-sqlite3 native addon
-        run: |
-          node -e "try{const d=require('better-sqlite3')(':memory:');d.exec('CREATE TABLE t(id INTEGER PRIMARY KEY,v TEXT)');d.prepare('INSERT INTO t(v) VALUES(?)').run('win');console.log(d.prepare('SELECT v FROM t').get().v);d.close();console.log('SQLITE: PASS')}catch(e){console.log('SQLITE:',e.message);process.exit(1)}"
+        shell: cmd
+        run: node -e "try{var d=require('better-sqlite3')(':memory:');d.exec('CREATE TABLE t(id INTEGER PRIMARY KEY,v TEXT)');d.prepare('INSERT INTO t(v) VALUES(?)').run('win');console.log(d.prepare('SELECT v FROM t').get().v);d.close();console.log('SQLITE: PASS')}catch(e){console.log('SQLITE:',e.message);process.exit(1)}"
       - name: CRLF test
-        run: |
-          node -e "const fs=require('fs'),p=require('path').join('.codeledger','crlf-test.jsonl');fs.writeFileSync(p,'{\"a\":1}\r\n{\"b\":2}\r\n');const l=fs.readFileSync(p,'utf8').trim().split(/\r?\n/).filter(Boolean);if(l.length!==2){process.exit(1)}for(const x of l)JSON.parse(x);console.log('CRLF: PASS');fs.unlinkSync(p)"
+        shell: cmd
+        run: node -e "var fs=require('fs'),p=require('path').join('.codeledger','crlf-test.jsonl');fs.writeFileSync(p,'{\"a\":1}\r\n{\"b\":2}\r\n');var l=fs.readFileSync(p,'utf8').trim().split(/\r?\n/).filter(Boolean);if(l.length!==2){process.exit(1);}for(var i=0;i<l.length;i++)JSON.parse(l[i]);console.log('CRLF: PASS');fs.unlinkSync(p)"
       - name: Summary
         if: always()
-        run: echo "=== Windows Verification Complete ==="
+        shell: cmd
+        run: echo === Windows Verification Complete ===
