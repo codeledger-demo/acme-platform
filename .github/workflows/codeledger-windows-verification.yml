@@ -1,0 +1,255 @@
+name: CodeLedger Windows Systems Verification
+on:
+  workflow_dispatch:
+
+jobs:
+  windows-battery:
+    runs-on: windows-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/checkout@v4
+        with:
+          repository: codeledgerECF/codeledger-blackbox
+          path: codeledger-source
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Install pnpm
+        run: npm install -g pnpm@9
+
+      - name: Install and build CodeLedger
+        working-directory: codeledger-source
+        run: |
+          pnpm install --no-frozen-lockfile
+          pnpm build
+
+      - name: Initialize CodeLedger in acme-platform
+        run: |
+          node codeledger-source/packages/cli/bin/codeledger-standalone.cjs init --force
+          echo "INIT: PASS"
+
+      - name: Environment info
+        run: |
+          echo "OS: Windows"
+          echo "Runner: $env:RUNNER_OS"
+          echo "Node: $(node --version)"
+          echo "Arch: $env:PROCESSOR_ARCHITECTURE"
+          echo "Platform: $(node -e 'console.log(process.platform)')"
+
+      - name: "Test 1: Scan"
+        working-directory: codeledger-source
+        run: |
+          node packages/cli/bin/codeledger-standalone.cjs scan
+          echo "SCAN: PASS"
+
+      - name: "Test 2: Explicit activation"
+        working-directory: codeledger-source
+        run: |
+          node packages/cli/bin/codeledger-standalone.cjs activate --task "Fix authentication middleware in packages/cli/src/auth" --quiet
+          echo "ACTIVATE: PASS"
+
+      - name: "Test 3: Lifecycle record check"
+        working-directory: codeledger-source
+        run: |
+          node -e "
+          const fs = require('fs');
+          const path = require('path');
+          const p = path.join('.codeledger', 'task-lifecycle.jsonl');
+          if (!fs.existsSync(p)) { console.log('LIFECYCLE: FAIL - file missing'); process.exit(1); }
+          const lines = fs.readFileSync(p, 'utf8').trim().split(/\r?\n/);
+          const last = JSON.parse(lines[lines.length - 1]);
+          console.log('Phase:', last.phase);
+          console.log('Task ID:', last.task_id);
+          console.log('Trigger:', last.trigger);
+          console.log('LIFECYCLE: PASS');
+          "
+
+      - name: "Test 4: Task status"
+        working-directory: codeledger-source
+        run: node packages/cli/bin/codeledger-standalone.cjs task status --json
+
+      - name: "Test 5: ISC thresholds (deterministic scoring)"
+        working-directory: codeledger-source
+        run: |
+          node -e "
+          const { checkIntentSufficiency } = require('./packages/engine/dist/isc/score.js');
+          const tests = [
+            ['fix', 'INSUFFICIENT', 0.300],
+            ['fix auth middleware', 'WEAK', 0.670],
+            ['Fix auth middleware in packages/cli/src/auth to handle expired tokens', 'SUFFICIENT', 0.940],
+          ];
+          let pass = 0;
+          for (const [prompt, expectedDecision, expectedScore] of tests) {
+            const r = checkIntentSufficiency(prompt);
+            const decisionOk = r.decision === expectedDecision;
+            const scoreOk = Math.abs(r.score - expectedScore) < 0.01;
+            if (decisionOk && scoreOk) pass++;
+            console.log(decisionOk && scoreOk ? 'PASS' : 'FAIL',
+              prompt.substring(0, 50),
+              'score=' + r.score.toFixed(3),
+              'decision=' + r.decision,
+              'expected=' + expectedDecision + '/' + expectedScore);
+          }
+          console.log(pass + '/' + tests.length + ' ISC tests passed');
+          if (pass < tests.length) process.exit(1);
+          "
+
+      - name: "Test 6: Outcome truth engine"
+        working-directory: codeledger-source
+        run: |
+          node -e "
+          const { classifyOutcomeTruth } = require('./packages/engine/dist/eng-intel/outcome-truth.js');
+          const tests = [
+            [{ entityId: 't1', entityType: 'task', verifyPassed: true }, 'success'],
+            [{ entityId: 't2', entityType: 'task', verifyPassed: false }, 'failure'],
+            [{ entityId: 't3', entityType: 'task', stuckEpisodes: 5 }, 'requires_intervention'],
+            [{ entityId: 't4', entityType: 'task' }, 'unknown'],
+          ];
+          let pass = 0;
+          for (const [input, expected] of tests) {
+            const r = classifyOutcomeTruth(input);
+            const ok = r.verdict === expected;
+            if (ok) pass++;
+            console.log(ok ? 'PASS' : 'FAIL', 'verdict=' + r.verdict, 'expected=' + expected);
+          }
+          console.log(pass + '/' + tests.length + ' outcome truth tests passed');
+          if (pass < tests.length) process.exit(1);
+          "
+
+      - name: "Test 7: Task type persistence"
+        working-directory: codeledger-source
+        run: |
+          node -e "
+          const fs = require('fs');
+          const lines = fs.readFileSync('.codeledger/task-lifecycle.jsonl', 'utf8').trim().split(/\r?\n/);
+          let found = false;
+          for (const line of lines) {
+            try {
+              const r = JSON.parse(line);
+              const a = r.activation || {};
+              if (a.task_type) {
+                console.log('type=' + a.task_type, 'conf=' + a.task_type_confidence, 'src=' + a.activation_source);
+                found = true;
+              }
+            } catch {}
+          }
+          if (!found) { console.log('NO TASK TYPE FOUND'); process.exit(1); }
+          console.log('TASK_TYPE: PASS');
+          "
+
+      - name: "Test 8: ISC delta / prompt lift"
+        working-directory: codeledger-source
+        run: |
+          node -e "
+          const fs = require('fs');
+          const lines = fs.readFileSync('.codeledger/task-lifecycle.jsonl', 'utf8').trim().split(/\r?\n/);
+          let found = false;
+          for (const line of lines) {
+            try {
+              const r = JSON.parse(line);
+              const a = r.activation || {};
+              if (typeof a.initial_isc === 'number') {
+                console.log('initial_isc=' + a.initial_isc, 'refined_isc=' + a.refined_isc, 'lift=' + a.prompt_lift, 'mode=' + a.refinement_mode);
+                found = true;
+              }
+            } catch {}
+          }
+          if (!found) { console.log('NO ISC DATA FOUND'); process.exit(1); }
+          console.log('ISC_DELTA: PASS');
+          "
+
+      - name: "Test 9: Degraded mode"
+        working-directory: codeledger-source
+        run: |
+          node -e "
+          const { getDegradedModePolicy, enforceDegradedMode } = require('./packages/cli/dist/task-lifecycle.js');
+          const policy = getDegradedModePolicy(process.cwd());
+          const enforce = enforceDegradedMode(process.cwd(), 'windows_test');
+          console.log('policy:', policy);
+          console.log('enforce:', enforce);
+          if (policy !== 'label') { console.log('UNEXPECTED POLICY'); process.exit(1); }
+          if (enforce !== true) { console.log('UNEXPECTED ENFORCE'); process.exit(1); }
+          console.log('DEGRADED: PASS');
+          "
+
+      - name: "Test 10: Activation confidence evaluator"
+        working-directory: codeledger-source
+        run: |
+          node -e "
+          const { evaluateActivationConfidence } = require('./packages/cli/dist/task-lifecycle.js');
+          const tests = [
+            ['fix', 'low', 'intercept'],
+            ['fix auth middleware', 'medium', 'assisted'],
+            ['Fix auth middleware in packages/cli/src/auth to handle expired tokens', 'high', 'ambient'],
+          ];
+          let pass = 0;
+          for (const [prompt, expectedConf, expectedMode] of tests) {
+            const r = evaluateActivationConfidence(prompt);
+            const ok = r.confidence === expectedConf && r.mode === expectedMode;
+            if (ok) pass++;
+            console.log(ok ? 'PASS' : 'FAIL', prompt.substring(0, 40), 'conf=' + r.confidence, 'mode=' + r.mode);
+          }
+          console.log(pass + '/' + tests.length + ' confidence tests passed');
+          if (pass < tests.length) process.exit(1);
+          "
+
+      - name: "Test 11: Windows path handling in ISC"
+        working-directory: codeledger-source
+        run: |
+          node -e "
+          const { checkIntentSufficiency } = require('./packages/engine/dist/isc/score.js');
+          const r = checkIntentSufficiency('Fix auth in packages\\\\cli\\\\src\\\\auth\\\\middleware.ts');
+          console.log('Score:', r.score, 'Decision:', r.decision);
+          console.log('Target specificity:', r.factors.targetSpecificity);
+          if (r.factors.targetSpecificity === 0) { console.log('FAIL: backslash paths not recognized'); process.exit(1); }
+          console.log('WINDOWS_PATHS: PASS');
+          "
+
+      - name: "Test 12: Vitest suite"
+        working-directory: codeledger-source
+        run: npx vitest run tests/task-lifecycle.test.ts tests/eng-intel.test.ts --reporter=verbose
+
+      - name: "Test 13: Broker refresh"
+        working-directory: codeledger-source
+        run: |
+          node packages/cli/bin/codeledger-standalone.cjs broker refresh --task "Refactor selector scoring" --json
+          echo "BROKER: PASS"
+
+      - name: "Test 14: Repeated init (idempotency)"
+        working-directory: codeledger-source
+        run: |
+          node packages/cli/bin/codeledger-standalone.cjs init
+          echo "IDEMPOTENT: PASS"
+
+      - name: "Test 15: Line ending robustness"
+        working-directory: codeledger-source
+        run: |
+          node -e "
+          const fs = require('fs');
+          const path = require('path');
+          // Write a JSONL file with Windows line endings
+          const testPath = path.join('.codeledger', 'test-crlf.jsonl');
+          const record = { activation_quality: { task_id: 'test_win', activation_source: 'explicit', activation_state: 'explicit_active' } };
+          fs.writeFileSync(testPath, JSON.stringify(record) + '\r\n' + JSON.stringify(record) + '\r\n');
+          // Read it back
+          const content = fs.readFileSync(testPath, 'utf8');
+          const lines = content.trim().split(/\r?\n/).filter(Boolean);
+          if (lines.length !== 2) { console.log('FAIL: expected 2 lines, got', lines.length); process.exit(1); }
+          for (const line of lines) { JSON.parse(line); }
+          console.log('CRLF: PASS');
+          fs.unlinkSync(testPath);
+          "
+
+      - name: Summary
+        if: always()
+        run: |
+          echo "=== Windows Systems Verification Complete ==="
+          echo "Platform: windows-latest (GitHub Actions)"
+          echo "Node: $(node --version)"
+          echo "OS: $env:RUNNER_OS"
+          echo "Arch: $env:PROCESSOR_ARCHITECTURE"
