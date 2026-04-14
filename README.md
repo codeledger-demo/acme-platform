@@ -74,12 +74,13 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 > This is a synthetic demonstration repository operated by CodeLedger.
 
 **Current Arc:** Feature Showcase (Arc 7)
-**Team Health:** 🟢 85/100
-**Last Activity:** 22h ago
+**Team Health:** 🟡 80/100
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(22h ago, sara-chen)*
+- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(1h ago, marcus-webb)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(yesterday, sara-chen)*
 - **📋 Ghost file detected — AI-generated helper never imported** *(yesterday, priya-k)*
 - **📋 Q4 sprint begins — checkout feature on tight deadline** *(6 days ago, marcus-webb)*
 
@@ -88,7 +89,7 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 1 | — |
-| Marcus Webb | 0% | 1 | — |
+| Marcus Webb | 0% | 2 | — |
 | Priya K | 0% | 1 | — |
 
 ![Team Health](.github/badges/health.svg)
