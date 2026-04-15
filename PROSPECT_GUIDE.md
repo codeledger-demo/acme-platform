@@ -168,6 +168,11 @@ The team's history is structured as seven story arcs. You're probably seeing one
 | 7C. Truth Control Plane | Release cycle truth grade progression. | Continuous truth loop: C→B→A with evidence chain. |
 | 7D. Post-Incident Intelligence | Explain/learnings/next after Priya's incident fix. | Phase 2 explainability: deterministic post-mortem, pattern analysis, action recommendations. |
 | 7E. Coach Guidance | Marcus gets implementation advice from symbol graph. | Evidence-cited plan with golden pattern references and ECL history. |
+| 7F. Shadow Validation | Sara refactors the scoring pipeline and validates with shadow. | Parallel truth evaluation: 96% match, 0% critical, SAFE TO EXPAND. |
+| 7G. Doctrine Block | Priya tries to build a parallel billing dashboard. | Two-phase stop triggered. Guided to extend existing system instead. |
+| 7H. Release Verify | Team catches stale standalone bundle before v2.5.0. | SHA256 mismatch detected. Feature propagation completed before release. |
+| 7I. Integrity Trinity | Full integrity check passes across all three domains. | Architecture PASS, Implementation PASS, Release PASS. Ships with evidence. |
+| 7J. Agent Performance | VP reviews per-agent scorecard on the dashboard. | Claude Code 89% FPS vs Cursor 76%. Deterministic, not vibes. |
 
 ## What you're NOT seeing
 
