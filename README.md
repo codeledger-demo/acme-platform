@@ -75,14 +75,14 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 80/100
-**Last Activity:** 3h ago
+**Last Activity:** 21h ago
 
 ### Recent Headlines
 
-- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(3h ago, marcus-webb)*
+- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(21h ago, marcus-webb)*
 - **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(yesterday, sara-chen)*
-- **📋 Ghost file detected — AI-generated helper never imported** *(yesterday, priya-k)*
-- **📋 Q4 sprint begins — checkout feature on tight deadline** *(6 days ago, marcus-webb)*
+- **📋 Ghost file detected — AI-generated helper never imported** *(2 days ago, priya-k)*
+- **📋 Q4 sprint begins — checkout feature on tight deadline** *(7 days ago, marcus-webb)*
 
 ### Developer Scorecards
 
