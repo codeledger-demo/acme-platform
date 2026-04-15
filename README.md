@@ -75,12 +75,13 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 80/100
-**Last Activity:** 23h ago
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(23h ago, marcus-webb)*
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(yesterday, sara-chen)*
+- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(1h ago, priya-k)*
+- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(yesterday, marcus-webb)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(2 days ago, sara-chen)*
 - **📋 Ghost file detected — AI-generated helper never imported** *(2 days ago, priya-k)*
 - **📋 Q4 sprint begins — checkout feature on tight deadline** *(7 days ago, marcus-webb)*
 
@@ -90,7 +91,7 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 1 | — |
 | Marcus Webb | 0% | 2 | — |
-| Priya K | 0% | 1 | — |
+| Priya K | 0% | 2 | — |
 
 ![Team Health](.github/badges/health.svg)
 
