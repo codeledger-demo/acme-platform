@@ -74,23 +74,23 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 > This is a synthetic demonstration repository operated by CodeLedger.
 
 **Current Arc:** Feature Showcase (Arc 7)
-**Team Health:** 🟡 73/100
-**Last Activity:** 23h ago
+**Team Health:** 🟡 76/100
+**Last Activity:** 1h ago
 
 ### Active Incident
 
 > 🚨 **🚫 Change Capsule blocked auth middleware change — CRS 0.81** -- 🚫 Change Capsule blocked auth middleware change — CRS 0.81
-> Triggered: 23h ago | Severity: critical
+> Triggered: yesterday | Severity: critical
 > Blocked: feat(auth): adjust JWT verification flow
 > Reason: Critical severity event detected
 
 ### Recent Headlines
 
-- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(23h ago, marcus-webb)*
-- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(yesterday, priya-k)*
-- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(2 days ago, marcus-webb)*
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(3 days ago, sara-chen)*
-- **📋 Ghost file detected — AI-generated helper never imported** *(4 days ago, priya-k)*
+- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(1h ago, priya-k)*
+- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(yesterday, marcus-webb)*
+- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(2 days ago, priya-k)*
+- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(3 days ago, marcus-webb)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(4 days ago, sara-chen)*
 
 ### Developer Scorecards
 
@@ -98,7 +98,7 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 1 | — |
 | Marcus Webb | 0% | 3 | — |
-| Priya K | 0% | 2 | — |
+| Priya K | 0% | 3 | — |
 
 ![Team Health](.github/badges/health.svg)
 
