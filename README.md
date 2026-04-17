@@ -75,22 +75,22 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 73/100
-**Last Activity:** 20h ago
+**Last Activity:** 23h ago
 
 ### Active Incident
 
 > 🚨 **🚫 Change Capsule blocked auth middleware change — CRS 0.81** -- 🚫 Change Capsule blocked auth middleware change — CRS 0.81
-> Triggered: 20h ago | Severity: critical
+> Triggered: 23h ago | Severity: critical
 > Blocked: feat(auth): adjust JWT verification flow
 > Reason: Critical severity event detected
 
 ### Recent Headlines
 
-- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(20h ago, marcus-webb)*
+- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(23h ago, marcus-webb)*
 - **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(yesterday, priya-k)*
 - **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(2 days ago, marcus-webb)*
 - **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(3 days ago, sara-chen)*
-- **📋 Ghost file detected — AI-generated helper never imported** *(3 days ago, priya-k)*
+- **📋 Ghost file detected — AI-generated helper never imported** *(4 days ago, priya-k)*
 
 ### Developer Scorecards
 
