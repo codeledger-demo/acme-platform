@@ -74,22 +74,22 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 > This is a synthetic demonstration repository operated by CodeLedger.
 
 **Current Arc:** Feature Showcase (Arc 7)
-**Team Health:** 🟡 76/100
-**Last Activity:** 2 days ago
+**Team Health:** 🟡 75/100
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(2 days ago, priya-k)*
-- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(3 days ago, marcus-webb)*
-- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(4 days ago, priya-k)*
-- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(5 days ago, marcus-webb)*
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(6 days ago, sara-chen)*
+- **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(1h ago, sara-chen)*
+- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(3 days ago, priya-k)*
+- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(4 days ago, marcus-webb)*
+- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(5 days ago, priya-k)*
+- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(6 days ago, marcus-webb)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
-| Sara Chen | 0% | 1 | — |
+| Sara Chen | 0% | 2 | — |
 | Marcus Webb | 0% | 3 | — |
 | Priya K | 0% | 3 | — |
 
