@@ -75,15 +75,15 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 75/100
-**Last Activity:** 23h ago
+**Last Activity:** yesterday
 
 ### Recent Headlines
 
-- **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(23h ago, sara-chen)*
-- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(3 days ago, priya-k)*
-- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(4 days ago, marcus-webb)*
-- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(5 days ago, priya-k)*
-- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(6 days ago, marcus-webb)*
+- **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(yesterday, sara-chen)*
+- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(4 days ago, priya-k)*
+- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(5 days ago, marcus-webb)*
+- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(6 days ago, priya-k)*
+- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(7 days ago, marcus-webb)*
 
 ### Developer Scorecards
 
