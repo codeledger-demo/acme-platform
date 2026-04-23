@@ -1,0 +1,53 @@
+# CodeLedger Post-Merge Capture — acme-platform install
+#
+# This is the concrete workflow to drop into
+# codeledger-demo/acme-platform at .github/workflows/codeledger-post-merge.yml.
+#
+# It is identical to the reusable template shipped at
+# codeledger-blackbox/.github/workflow-templates/codeledger-post-merge.yml,
+# except the CLI is invoked via the vendored standalone binary that
+# `codeledger init` writes into .codeledger/bin/ (no rebuild step needed
+# inside acme-platform).
+
+name: CodeLedger Post-Merge
+
+on:
+  pull_request:
+    types: [closed]
+
+permissions:
+  contents: read
+
+jobs:
+  capture:
+    if: >
+      github.event.pull_request.merged == true
+      && github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          fetch-depth: 0
+
+      - uses: actions/setup-node@v5
+        with:
+          node-version: 22
+
+      - name: Capture merge memory
+        run: |
+          node .codeledger/bin/codeledger-standalone.cjs capture-merge-memory \
+            --author "${{ github.event.pull_request.user.login }}" \
+            --commit "${{ github.event.pull_request.merge_commit_sha }}" \
+            --json > /tmp/merge-memory-record.json
+          cat /tmp/merge-memory-record.json
+
+      - name: Upload merge memory record
+        uses: actions/upload-artifact@v4
+        with:
+          name: merge-memory-record-${{ github.event.pull_request.merge_commit_sha }}
+          path: |
+            /tmp/merge-memory-record.json
+            .codeledger/team-ledger/merge-memory-records.jsonl
+          if-no-files-found: warn
+          retention-days: 90
