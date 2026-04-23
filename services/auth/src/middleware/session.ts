@@ -6,7 +6,7 @@
  */
 
 import type { Session, SessionCreateInput, SessionMetadata } from '../models/session.js';
-import { logger } from '../index.js';
+import { logger } from '../config.js';
 
 // ---------------------------------------------------------------------------
 // Session store interface
@@ -27,10 +27,10 @@ export interface SessionStore {
 // In-memory implementation
 // ---------------------------------------------------------------------------
 
-let nextSessionId = 1;
+import { randomBytes } from 'node:crypto';
 
 function generateSessionId(): string {
-  return `ses_${String(nextSessionId++).padStart(10, '0')}`;
+  return `ses_${randomBytes(16).toString('hex')}`;
 }
 
 export class InMemorySessionStore implements SessionStore {
@@ -151,6 +151,11 @@ export class InMemorySessionStore implements SessionStore {
 // ---------------------------------------------------------------------------
 
 const defaultStore = new InMemorySessionStore();
+
+// Prune expired sessions every 5 minutes to prevent unbounded memory growth.
+const PRUNE_INTERVAL_MS = 5 * 60 * 1000;
+const pruneTimer = setInterval(() => defaultStore.prune(), PRUNE_INTERVAL_MS);
+pruneTimer.unref(); // don't keep the process alive solely for pruning
 
 export function createSession(input: SessionCreateInput): Session {
   return defaultStore.create(input);

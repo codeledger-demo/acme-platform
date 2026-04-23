@@ -7,8 +7,9 @@
  * verification against the signing key.
  */
 
+import { createHmac, timingSafeEqual } from 'node:crypto';
 import { AuthenticationError } from '@acme/shared-utils';
-import { logger } from '../index.js';
+import { logger } from '../config.js';
 
 // ---------------------------------------------------------------------------
 // Types
@@ -75,7 +76,7 @@ function splitToken(token: string): { header: string; payload: string; signature
  *
  * Throws `AuthenticationError` on any failure.
  */
-export function verifyToken(token: string, _secret: string): JwtPayload {
+export function verifyToken(token: string, secret: string): JwtPayload {
   const segments = splitToken(token);
   if (!segments) {
     throw new AuthenticationError('Malformed token: expected three dot-separated segments');
@@ -120,9 +121,21 @@ export function verifyToken(token: string, _secret: string): JwtPayload {
     throw new AuthenticationError('Token has expired');
   }
 
-  // --- Signature verification (placeholder) ---
-  // In production, compute HMAC-SHA256(header.payload, secret) and compare
-  // to the decoded signature segment. For this demo we skip the check.
+  // --- Signature verification ---
+  const data = `${segments.header}.${segments.payload}`;
+  const expected = createHmac('sha256', secret).update(data).digest('base64url');
+  let signatureValid: boolean;
+  try {
+    signatureValid = timingSafeEqual(
+      Buffer.from(segments.signature),
+      Buffer.from(expected),
+    );
+  } catch {
+    signatureValid = false;
+  }
+  if (!signatureValid) {
+    throw new AuthenticationError('Token signature is invalid');
+  }
 
   return {
     sub,

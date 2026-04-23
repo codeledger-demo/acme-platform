@@ -24,12 +24,13 @@ In browser/cloud agent containers, use the pinned runtime directly: `node .codel
 If you need to trigger the rule directly, use `./.codeledger/bin/codeledger auto-refresh --prompt "<user request>"`: refresh on new meaningful tasks, skip acknowledgements like "yes please" or same-task follow-ups.
 Ambient toggles live in `.codeledger/config.json` under `ambient.auto_refresh_enabled` and `ambient.prompt_coach_enabled`.
 For mid-session retrieval, call `./.codeledger/bin/codeledger broker refresh --task "<user request>" --json` first. Use the returned ranked files and bundle delta before falling back to raw shell search.
+Broker responses include `retrievalContract.schema_version: "codeledger/broker-first/v1"`, and hooks/wrappers write `.codeledger/runtime/latest-broker-contract.json` as proof that raw search is only a fallback.
 To inspect the current session state, use `./.codeledger/bin/codeledger broker current --json` for the current bundle/delta and `./.codeledger/bin/codeledger broker timeline --limit 10 --json` for the recent truth tail.
 
 ### CLI Resolution
 
 Use the repo-local wrapper at `./.codeledger/bin/codeledger` when it exists.
-It prefers a newer global `codeledger` install on local machines and falls back to the vendored standalone runtime everywhere else.
+It keeps repo-local behavior stable when versions differ and falls back to the vendored standalone runtime when needed.
 
 ```bash
 # Preferred in a repo after `codeledger init`:
@@ -92,7 +93,7 @@ Hooks in `.claude/hooks.json` run automatically:
 - **SessionStart** — scans repo, warms index
 - **UserPromptSubmit** — intent-aware auto-refresh; skips "yes please" style follow-ups and same-task replies
 - **PreToolUse** — reminds agent to check the active bundle before editing
-- **PostToolUse** — shows bundle recall/precision after git commits
+- **PostToolUse** — shows bundle recall/precision and a compact value receipt after git commits
 - **PreCompact** — saves progress snapshot before context compaction
 - **Stop** — shows final session recap with recall, precision, token savings
 

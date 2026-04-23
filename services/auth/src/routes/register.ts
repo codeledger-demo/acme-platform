@@ -5,7 +5,7 @@
 
 import { ConflictError, ValidationError } from '@acme/shared-utils';
 import { validateUserCreate } from '@acme/validation';
-import { logger } from '../index.js';
+import { logger } from '../config.js';
 import { UserStore, type UserPublic } from '../models/user.js';
 import { hashPassword } from '../utils/hash.js';
 

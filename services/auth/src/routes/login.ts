@@ -5,7 +5,7 @@
 
 import { AuthenticationError } from '@acme/shared-utils';
 import { validateEmail } from '@acme/validation';
-import { logger, JWT_SECRET, TOKEN_EXPIRY_SECONDS, SESSION_TTL_SECONDS } from '../index.js';
+import { logger, TOKEN_EXPIRY_SECONDS, SESSION_TTL_SECONDS } from '../config.js';
 import { UserStore } from '../models/user.js';
 import { verifyPassword } from '../utils/hash.js';
 import { generateTokenPair } from '../utils/token.js';
@@ -82,7 +82,7 @@ export function loginHandler(req: LoginRequest): LoginResponse {
     refreshToken: tokens.refreshToken,
     expiresAt,
     metadata: {
-      ipAddress: req.ip ?? req.headers['x-forwarded-for'] ?? null,
+      ipAddress: req.ip ?? (req.headers['x-forwarded-for'] ?? '').split(',')[0]?.trim() ?? null,
       userAgent: req.headers['user-agent'] ?? null,
     },
   });

@@ -53,6 +53,15 @@ export function validateOAuthState(input: unknown): ValidationResult {
 
   if (typeof record.redirectUri !== 'string' || record.redirectUri.length === 0) {
     errors.push('Redirect URI is required.');
+  } else {
+    try {
+      const url = new URL(record.redirectUri);
+      if (url.protocol !== 'https:') {
+        errors.push('Redirect URI must use HTTPS.');
+      }
+    } catch {
+      errors.push('Redirect URI must be a valid URL.');
+    }
   }
 
   return { valid: errors.length === 0, errors };

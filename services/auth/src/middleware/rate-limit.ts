@@ -6,7 +6,7 @@
  */
 
 import { RateLimitError } from '@acme/shared-utils';
-import { logger } from '../index.js';
+import { logger } from '../config.js';
 
 // ---------------------------------------------------------------------------
 // Types
