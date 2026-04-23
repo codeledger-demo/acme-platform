@@ -3,7 +3,7 @@
  */
 
 import { AuthenticationError, NotFoundError, ValidationError } from '@acme/shared-utils';
-import { logger } from '../index.js';
+import { logger } from '../config.js';
 import { UserStore } from '../models/user.js';
 import { hashPassword } from '../utils/hash.js';
 import { generateResetToken } from '../utils/token.js';

@@ -1,22 +1,12 @@
 /**
  * Auth Service — entry point.
  *
- * Initializes logging, loads configuration, and exports the route handlers
- * so they can be mounted by the top-level HTTP server.
+ * Re-exports configuration and route handlers so they can be mounted
+ * by the top-level HTTP server.
  */
 
-import { Logger, Config } from '@acme/shared-utils';
-
-const config = new Config({ prefix: 'AUTH' });
-
-export const logger = new Logger(
-  { service: 'auth' },
-  config.getString('LOG_LEVEL', 'info') === 'debug' ? 'debug' : 'info',
-);
-
-export const JWT_SECRET = config.getString('JWT_SECRET', 'dev-secret-do-not-use');
-export const TOKEN_EXPIRY_SECONDS = config.getNumber('TOKEN_EXPIRY_SECONDS', 3600);
-export const SESSION_TTL_SECONDS = config.getNumber('SESSION_TTL_SECONDS', 86_400);
+export { logger, JWT_SECRET, TOKEN_EXPIRY_SECONDS, SESSION_TTL_SECONDS } from './config.js';
+import { logger, TOKEN_EXPIRY_SECONDS, SESSION_TTL_SECONDS } from './config.js';
 
 logger.info('Auth service initializing', {
   tokenExpiry: TOKEN_EXPIRY_SECONDS,

@@ -4,7 +4,7 @@
  */
 
 import { AuthenticationError, ValidationError } from '@acme/shared-utils';
-import { logger, TOKEN_EXPIRY_SECONDS, SESSION_TTL_SECONDS } from '../index.js';
+import { logger, TOKEN_EXPIRY_SECONDS, SESSION_TTL_SECONDS } from '../config.js';
 import { UserStore, type User } from '../models/user.js';
 import { generateTokenPair } from '../utils/token.js';
 import { createSession } from '../middleware/session.js';
