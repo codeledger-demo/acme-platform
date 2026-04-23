@@ -152,6 +152,11 @@ export class InMemorySessionStore implements SessionStore {
 
 const defaultStore = new InMemorySessionStore();
 
+// Prune expired sessions every 5 minutes to prevent unbounded memory growth.
+const PRUNE_INTERVAL_MS = 5 * 60 * 1000;
+const pruneTimer = setInterval(() => defaultStore.prune(), PRUNE_INTERVAL_MS);
+pruneTimer.unref(); // don't keep the process alive solely for pruning
+
 export function createSession(input: SessionCreateInput): Session {
   return defaultStore.create(input);
 }

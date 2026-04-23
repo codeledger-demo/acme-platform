@@ -3,6 +3,7 @@
  * providers (Google, GitHub, etc.).
  */
 
+import { randomBytes } from 'node:crypto';
 import { AuthenticationError, ValidationError } from '@acme/shared-utils';
 import { logger, TOKEN_EXPIRY_SECONDS, SESSION_TTL_SECONDS } from '../config.js';
 import { UserStore, type User } from '../models/user.js';
@@ -52,12 +53,7 @@ const pendingStates: Map<string, { provider: OAuthProvider; redirectUri: string;
 export const userStore = new UserStore();
 
 function generateState(): string {
-  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  let result = '';
-  for (let i = 0; i < 32; i++) {
-    result += chars[Math.floor(Math.random() * chars.length)];
-  }
-  return result;
+  return randomBytes(24).toString('base64url');
 }
 
 // ---------------------------------------------------------------------------
