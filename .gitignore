@@ -13,3 +13,11 @@ dist/
 coverage/
 .DS_Store
 next-env.d.ts
+.codeledger/*
+!.codeledger/team-ledger/
+!.codeledger/team-ledger/**
+!.codeledger/bin/
+!.codeledger/bin/**
+!.claude/hooks.json
+CLAUDE.local.md
+.release-worktree/
