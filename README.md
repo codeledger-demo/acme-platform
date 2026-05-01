@@ -74,22 +74,22 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 > This is a synthetic demonstration repository operated by CodeLedger.
 
 **Current Arc:** Feature Showcase (Arc 7)
-**Team Health:** 🟡 79/100
-**Last Activity:** 15h ago
+**Team Health:** 🟡 80/100
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(15h ago, sara-chen)*
-- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(15h ago, priya-k)*
-- **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(10 days ago, sara-chen)*
-- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(13 days ago, priya-k)*
-- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(14 days ago, marcus-webb)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(1h ago, sara-chen)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(18h ago, sara-chen)*
+- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(18h ago, priya-k)*
+- **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(11 days ago, sara-chen)*
+- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(14 days ago, priya-k)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
-| Sara Chen | 0% | 3 | — |
+| Sara Chen | 0% | 4 | — |
 | Marcus Webb | 0% | 3 | — |
 | Priya K | 0% | 4 | — |
 
