@@ -74,24 +74,24 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 > This is a synthetic demonstration repository operated by CodeLedger.
 
 **Current Arc:** Feature Showcase (Arc 7)
-**Team Health:** 🟡 75/100
-**Last Activity:** 10 days ago
+**Team Health:** 🟡 79/100
+**Last Activity:** 13h ago
 
 ### Recent Headlines
 
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(13h ago, sara-chen)*
+- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(13h ago, priya-k)*
 - **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(10 days ago, sara-chen)*
 - **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(13 days ago, priya-k)*
 - **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(14 days ago, marcus-webb)*
-- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(15 days ago, priya-k)*
-- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(16 days ago, marcus-webb)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
-| Sara Chen | 0% | 2 | — |
+| Sara Chen | 0% | 3 | — |
 | Marcus Webb | 0% | 3 | — |
-| Priya K | 0% | 3 | — |
+| Priya K | 0% | 4 | — |
 
 ![Team Health](.github/badges/health.svg)
 
