@@ -74,22 +74,22 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 > This is a synthetic demonstration repository operated by CodeLedger.
 
 **Current Arc:** Feature Showcase (Arc 7)
-**Team Health:** 🟡 80/100
-**Last Activity:** 23h ago
+**Team Health:** 🟡 82/100
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **📋 🧭 Coach guides Marcus using Sara's golden billing pattern** *(23h ago, marcus-webb)*
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(3 days ago, sara-chen)*
+- **✅ 📊 Truth grade climbs C→B→A as release evidence accumulates** *(1h ago, sara-chen)*
+- **📋 🧭 Coach guides Marcus using Sara's golden billing pattern** *(yesterday, marcus-webb)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(4 days ago, sara-chen)*
 - **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(4 days ago, sara-chen)*
 - **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(4 days ago, priya-k)*
-- **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(14 days ago, sara-chen)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
-| Sara Chen | 0% | 4 | — |
+| Sara Chen | 0% | 5 | — |
 | Marcus Webb | 0% | 4 | — |
 | Priya K | 0% | 4 | — |
 
