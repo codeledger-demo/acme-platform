@@ -74,16 +74,16 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 > This is a synthetic demonstration repository operated by CodeLedger.
 
 **Current Arc:** Feature Showcase (Arc 7)
-**Team Health:** 🟡 82/100
-**Last Activity:** 23h ago
+**Team Health:** 🟡 81/100
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **✅ 📊 Truth grade climbs C→B→A as release evidence accumulates** *(23h ago, sara-chen)*
-- **📋 🧭 Coach guides Marcus using Sara's golden billing pattern** *(yesterday, marcus-webb)*
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(4 days ago, sara-chen)*
+- **📋 📖 Phase 2 intelligence produces deterministic post-incident analysis** *(1h ago, priya-k)*
+- **✅ 📊 Truth grade climbs C→B→A as release evidence accumulates** *(yesterday, sara-chen)*
+- **📋 🧭 Coach guides Marcus using Sara's golden billing pattern** *(2 days ago, marcus-webb)*
 - **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(5 days ago, sara-chen)*
-- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(5 days ago, priya-k)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(5 days ago, sara-chen)*
 
 ### Developer Scorecards
 
@@ -91,7 +91,7 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 5 | — |
 | Marcus Webb | 0% | 4 | — |
-| Priya K | 0% | 4 | — |
+| Priya K | 0% | 5 | — |
 
 ![Team Health](.github/badges/health.svg)
 
