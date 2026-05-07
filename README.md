@@ -75,15 +75,15 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 81/100
-**Last Activity:** 3h ago
+**Last Activity:** 21h ago
 
 ### Recent Headlines
 
-- **📋 📖 Phase 2 intelligence produces deterministic post-incident analysis** *(3h ago, priya-k)*
+- **📋 📖 Phase 2 intelligence produces deterministic post-incident analysis** *(21h ago, priya-k)*
 - **✅ 📊 Truth grade climbs C→B→A as release evidence accumulates** *(yesterday, sara-chen)*
 - **📋 🧭 Coach guides Marcus using Sara's golden billing pattern** *(2 days ago, marcus-webb)*
 - **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(5 days ago, sara-chen)*
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(5 days ago, sara-chen)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(6 days ago, sara-chen)*
 
 ### Developer Scorecards
 
