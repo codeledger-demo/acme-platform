@@ -75,11 +75,11 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 82/100
-**Last Activity:** 1h ago
+**Last Activity:** 3h ago
 
 ### Recent Headlines
 
-- **✅ 🔬 Shadow PASS: Sara's scoring refactor verified — 96% match, 0% critical** *(1h ago, sara-chen)*
+- **✅ 🔬 Shadow PASS: Sara's scoring refactor verified — 96% match, 0% critical** *(3h ago, sara-chen)*
 - **📋 🧭 Coach produces 4-step evidence-cited plan for webhook event type** *(yesterday, marcus-webb)*
 - **📋 📖 Phase 2 intelligence produces deterministic post-incident analysis** *(2 days ago, priya-k)*
 - **✅ 📊 Truth grade climbs C→B→A as release evidence accumulates** *(3 days ago, sara-chen)*
