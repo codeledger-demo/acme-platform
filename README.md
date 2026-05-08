@@ -75,11 +75,11 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 81/100
-**Last Activity:** 3h ago
+**Last Activity:** 21h ago
 
 ### Recent Headlines
 
-- **📋 🧭 Coach produces 4-step evidence-cited plan for webhook event type** *(3h ago, marcus-webb)*
+- **📋 🧭 Coach produces 4-step evidence-cited plan for webhook event type** *(21h ago, marcus-webb)*
 - **📋 📖 Phase 2 intelligence produces deterministic post-incident analysis** *(yesterday, priya-k)*
 - **✅ 📊 Truth grade climbs C→B→A as release evidence accumulates** *(2 days ago, sara-chen)*
 - **📋 🧭 Coach guides Marcus using Sara's golden billing pattern** *(3 days ago, marcus-webb)*
@@ -90,7 +90,7 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 5 | — |
-| Marcus Webb | 0% | 5 | — |
+| Marcus Webb | 0% | 4 | — |
 | Priya K | 0% | 5 | — |
 
 ![Team Health](.github/badges/health.svg)
