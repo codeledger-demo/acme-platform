@@ -75,15 +75,15 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 82/100
-**Last Activity:** 21h ago
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **📋 🔁 Terminal Replay captured a live remediation flow** *(21h ago, sara-chen)*
-- **✅ 🔬 Shadow PASS: Sara's scoring refactor verified — 96% match, 0% critical** *(3 days ago, sara-chen)*
-- **📋 🧭 Coach produces 4-step evidence-cited plan for webhook event type** *(4 days ago, marcus-webb)*
-- **📋 📖 Phase 2 intelligence produces deterministic post-incident analysis** *(5 days ago, priya-k)*
-- **✅ 📊 Truth grade climbs C→B→A as release evidence accumulates** *(6 days ago, sara-chen)*
+- **📋 🛡️ Doctrine STOP: prevented parallel billing dashboard — guided to extension** *(1h ago, priya-k)*
+- **📋 🔁 Terminal Replay captured a live remediation flow** *(yesterday, sara-chen)*
+- **✅ 🔬 Shadow PASS: Sara's scoring refactor verified — 96% match, 0% critical** *(4 days ago, sara-chen)*
+- **📋 🧭 Coach produces 4-step evidence-cited plan for webhook event type** *(5 days ago, marcus-webb)*
+- **📋 📖 Phase 2 intelligence produces deterministic post-incident analysis** *(6 days ago, priya-k)*
 
 ### Developer Scorecards
 
@@ -91,7 +91,7 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 7 | — |
 | Marcus Webb | 0% | 4 | — |
-| Priya K | 0% | 5 | — |
+| Priya K | 0% | 6 | — |
 
 ![Team Health](.github/badges/health.svg)
 
