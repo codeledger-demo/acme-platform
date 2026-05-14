@@ -75,11 +75,11 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 83/100
-**Last Activity:** 3h ago
+**Last Activity:** 21h ago
 
 ### Recent Headlines
 
-- **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(3h ago, marcus-webb)*
+- **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(21h ago, marcus-webb)*
 - **📋 🛡️ Doctrine STOP: prevented parallel billing dashboard — guided to extension** *(yesterday, priya-k)*
 - **📋 🔁 Terminal Replay captured a live remediation flow** *(2 days ago, sara-chen)*
 - **✅ 🔬 Shadow PASS: Sara's scoring refactor verified — 96% match, 0% critical** *(5 days ago, sara-chen)*
