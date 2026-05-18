@@ -75,23 +75,23 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 83/100
-**Last Activity:** 3h ago
+**Last Activity:** 2 days ago
 
 ### Recent Headlines
 
-- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(3h ago, sara-chen)*
-- **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(yesterday, sara-chen)*
-- **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(2 days ago, marcus-webb)*
-- **📋 🛡️ Doctrine STOP: prevented parallel billing dashboard — guided to extension** *(3 days ago, priya-k)*
-- **📋 🔁 Terminal Replay captured a live remediation flow** *(4 days ago, sara-chen)*
+- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(2 days ago, sara-chen)*
+- **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(3 days ago, sara-chen)*
+- **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(4 days ago, marcus-webb)*
+- **📋 🛡️ Doctrine STOP: prevented parallel billing dashboard — guided to extension** *(5 days ago, priya-k)*
+- **📋 🔁 Terminal Replay captured a live remediation flow** *(6 days ago, sara-chen)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 7 | — |
-| Marcus Webb | 0% | 4 | — |
-| Priya K | 0% | 4 | — |
+| Marcus Webb | 0% | 3 | — |
+| Priya K | 0% | 3 | — |
 
 ![Team Health](.github/badges/health.svg)
 
