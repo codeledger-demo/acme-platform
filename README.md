@@ -75,23 +75,23 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 83/100
-**Last Activity:** 21h ago
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(21h ago, marcus-webb)*
-- **✅ 📊 Agent Intelligence: Claude Code 89% FPS vs Cursor 76% — 13% advantage** *(yesterday, sara-chen)*
-- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(4 days ago, sara-chen)*
-- **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(5 days ago, sara-chen)*
-- **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(6 days ago, marcus-webb)*
+- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(1h ago, priya-k)*
+- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(yesterday, marcus-webb)*
+- **✅ 📊 Agent Intelligence: Claude Code 89% FPS vs Cursor 76% — 13% advantage** *(2 days ago, sara-chen)*
+- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(5 days ago, sara-chen)*
+- **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(6 days ago, sara-chen)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
-| Sara Chen | 0% | 7 | — |
+| Sara Chen | 0% | 6 | — |
 | Marcus Webb | 0% | 4 | — |
-| Priya K | 0% | 3 | — |
+| Priya K | 0% | 4 | — |
 
 ![Team Health](.github/badges/health.svg)
 
