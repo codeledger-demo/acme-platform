@@ -74,23 +74,30 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 > This is a synthetic demonstration repository operated by CodeLedger.
 
 **Current Arc:** Feature Showcase (Arc 7)
-**Team Health:** 🟡 83/100
-**Last Activity:** 21h ago
+**Team Health:** 🟡 81/100
+**Last Activity:** 1h ago
+
+### Active Incident
+
+> 🚨 **🚫 Change Capsule blocked auth middleware change — CRS 0.81** -- 🚫 Change Capsule blocked auth middleware change — CRS 0.81
+> Triggered: 1h ago | Severity: critical
+> Blocked: feat(auth): adjust JWT verification flow
+> Reason: Critical severity event detected
 
 ### Recent Headlines
 
-- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(21h ago, priya-k)*
-- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(yesterday, marcus-webb)*
-- **✅ 📊 Agent Intelligence: Claude Code 89% FPS vs Cursor 76% — 13% advantage** *(2 days ago, sara-chen)*
-- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(5 days ago, sara-chen)*
-- **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(6 days ago, sara-chen)*
+- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(1h ago, marcus-webb)*
+- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(yesterday, priya-k)*
+- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(2 days ago, marcus-webb)*
+- **✅ 📊 Agent Intelligence: Claude Code 89% FPS vs Cursor 76% — 13% advantage** *(3 days ago, sara-chen)*
+- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(6 days ago, sara-chen)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 6 | — |
-| Marcus Webb | 0% | 4 | — |
+| Marcus Webb | 0% | 5 | — |
 | Priya K | 0% | 4 | — |
 
 ![Team Health](.github/badges/health.svg)
