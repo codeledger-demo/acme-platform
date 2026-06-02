@@ -75,11 +75,11 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 83/100
-**Last Activity:** 53m ago
+**Last Activity:** 21h ago
 
 ### Recent Headlines
 
-- **📋 🧭 Coach produces 4-step evidence-cited plan for webhook event type** *(53m ago, marcus-webb)*
+- **📋 🧭 Coach produces 4-step evidence-cited plan for webhook event type** *(21h ago, marcus-webb)*
 - **📋 📖 Phase 2 intelligence produces deterministic post-incident analysis** *(3 days ago, priya-k)*
 - **✅ 📊 Truth grade climbs C→B→A as release evidence accumulates** *(4 days ago, sara-chen)*
 - **📋 🧭 Coach guides Marcus using Sara's golden billing pattern** *(5 days ago, marcus-webb)*
