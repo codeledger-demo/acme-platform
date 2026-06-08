@@ -75,15 +75,15 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 83/100
-**Last Activity:** 2 days ago
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(2 days ago, marcus-webb)*
-- **📋 🛡️ Doctrine STOP: prevented parallel billing dashboard — guided to extension** *(3 days ago, priya-k)*
-- **📋 🔁 Terminal Replay captured a live remediation flow** *(4 days ago, sara-chen)*
-- **✅ 🔬 Shadow PASS: Sara's scoring refactor verified — 96% match, 0% critical** *(5 days ago, sara-chen)*
-- **📋 🧭 Coach produces 4-step evidence-cited plan for webhook event type** *(6 days ago, marcus-webb)*
+- **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(1h ago, sara-chen)*
+- **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(3 days ago, marcus-webb)*
+- **📋 🛡️ Doctrine STOP: prevented parallel billing dashboard — guided to extension** *(4 days ago, priya-k)*
+- **📋 🔁 Terminal Replay captured a live remediation flow** *(5 days ago, sara-chen)*
+- **✅ 🔬 Shadow PASS: Sara's scoring refactor verified — 96% match, 0% critical** *(6 days ago, sara-chen)*
 
 ### Developer Scorecards
 
