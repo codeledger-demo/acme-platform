@@ -3,7 +3,7 @@ name: Vendor CodeLedger CLI
 # Vendors a specific CodeLedger CLI release into .codeledger/bin/.
 # Commits directly to main (org settings prevent Actions from opening PRs).
 #
-# Uses npm (not pnpm) to install the CLI globally -- no pnpm setup needed.
+# Uses npm (not pnpm) to install the CLI globally.
 
 on:
   repository_dispatch:
@@ -29,10 +29,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - uses: actions/setup-node@v5
+      # Use v4 to avoid setup-node v5 auto-detecting pnpm from package.json
+      - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: "npm"   # force npm cache; avoids pnpm auto-detection from package.json
 
       - name: Resolve version
         id: ver
