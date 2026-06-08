@@ -75,22 +75,22 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 83/100
-**Last Activity:** 3h ago
+**Last Activity:** 2 days ago
 
 ### Recent Headlines
 
-- **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(3h ago, marcus-webb)*
-- **📋 🛡️ Doctrine STOP: prevented parallel billing dashboard — guided to extension** *(yesterday, priya-k)*
-- **📋 🔁 Terminal Replay captured a live remediation flow** *(2 days ago, sara-chen)*
-- **✅ 🔬 Shadow PASS: Sara's scoring refactor verified — 96% match, 0% critical** *(3 days ago, sara-chen)*
-- **📋 🧭 Coach produces 4-step evidence-cited plan for webhook event type** *(4 days ago, marcus-webb)*
+- **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(2 days ago, marcus-webb)*
+- **📋 🛡️ Doctrine STOP: prevented parallel billing dashboard — guided to extension** *(3 days ago, priya-k)*
+- **📋 🔁 Terminal Replay captured a live remediation flow** *(4 days ago, sara-chen)*
+- **✅ 🔬 Shadow PASS: Sara's scoring refactor verified — 96% match, 0% critical** *(5 days ago, sara-chen)*
+- **📋 🧭 Coach produces 4-step evidence-cited plan for webhook event type** *(6 days ago, marcus-webb)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
-| Sara Chen | 0% | 8 | — |
-| Marcus Webb | 0% | 7 | — |
+| Sara Chen | 0% | 7 | — |
+| Marcus Webb | 0% | 6 | — |
 | Priya K | 0% | 5 | — |
 
 ![Team Health](.github/badges/health.svg)
