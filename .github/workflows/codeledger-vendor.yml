@@ -1,6 +1,7 @@
 name: Vendor CodeLedger CLI
 
 # Vendors a specific CodeLedger CLI release into .codeledger/bin/.
+# Commits directly to main (org settings prevent Actions from opening PRs).
 
 on:
   repository_dispatch:
@@ -14,7 +15,6 @@ on:
 
 permissions:
   contents: write
-  pull-requests: write
 
 jobs:
   vendor:
@@ -52,29 +52,16 @@ jobs:
           codeledger init --force
           echo "Vendored v${VERSION} into .codeledger/bin/"
 
-      - name: Open auto-merge PR
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Commit directly to main
         run: |
           VERSION="${{ steps.ver.outputs.version }}"
-          BRANCH="chore/codeledger-cli-v${VERSION}"
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          EXISTING=$(gh pr list --head "$BRANCH" --json number --jq ".[0].number" 2>/dev/null || true)
-          if [ -n "$EXISTING" ]; then
-            echo "PR #${EXISTING} already open for ${BRANCH} -- done"
-            exit 0
-          fi
-          git checkout -b "$BRANCH"
           # Force-add because .codeledger/bin is in .gitignore
           git add -f .codeledger/bin/ || true
-          git diff --cached --quiet && echo "No changes -- already up to date" && exit 0
+          git diff --cached --quiet \
+            && echo "No changes -- .codeledger/bin already at v${VERSION}" \
+            && exit 0
           git commit -m "chore: vendor codeledger CLI v${VERSION}"
-          git push origin "$BRANCH"
-          PR_URL=$(gh pr create \
-            --title "chore: vendor codeledger CLI v${VERSION}" \
-            --base main \
-            --head "$BRANCH" \
-            --body "Automatic CLI vendor update for CodeLedger v${VERSION}. Updates .codeledger/bin/ so post-merge workflows have access to the latest CLI commands.")
-          echo "Created: $PR_URL"
-          gh pr merge --auto --squash "$PR_URL" || echo "Auto-merge not available -- please merge manually"
+          git push origin main
+          echo "Pushed vendor update for v${VERSION} directly to main"
