@@ -27,11 +27,10 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           fetch-depth: 0
 
-      - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v5
         with:
           node-version: 22
+          cache: ""   # no pnpm install in this job — skip cache setup
 
       - name: Resolve version
         id: ver
@@ -65,3 +64,4 @@ jobs:
           git commit -m "chore: vendor codeledger CLI v${VERSION}"
           git push origin main
           echo "Pushed vendor update for v${VERSION} directly to main"
+
