@@ -75,11 +75,11 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 83/100
-**Last Activity:** 3h ago
+**Last Activity:** 21h ago
 
 ### Recent Headlines
 
-- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(3h ago, sara-chen)*
+- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(21h ago, sara-chen)*
 - **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(yesterday, sara-chen)*
 - **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(4 days ago, marcus-webb)*
 - **📋 🛡️ Doctrine STOP: prevented parallel billing dashboard — guided to extension** *(5 days ago, priya-k)*
