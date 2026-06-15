@@ -75,21 +75,21 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 82/100
-**Last Activity:** 3h ago
+**Last Activity:** 2 days ago
 
 ### Recent Headlines
 
-- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(3h ago, priya-k)*
-- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(yesterday, marcus-webb)*
-- **✅ 📊 Agent Intelligence: Claude Code 89% FPS vs Cursor 76% — 13% advantage** *(2 days ago, sara-chen)*
-- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(3 days ago, sara-chen)*
-- **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(4 days ago, sara-chen)*
+- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(2 days ago, priya-k)*
+- **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(3 days ago, marcus-webb)*
+- **✅ 📊 Agent Intelligence: Claude Code 89% FPS vs Cursor 76% — 13% advantage** *(4 days ago, sara-chen)*
+- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(5 days ago, sara-chen)*
+- **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(6 days ago, sara-chen)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
-| Sara Chen | 0% | 7 | — |
+| Sara Chen | 0% | 6 | — |
 | Marcus Webb | 0% | 6 | — |
 | Priya K | 0% | 5 | — |
 
