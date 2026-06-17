@@ -75,7 +75,7 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 81/100
-**Last Activity:** 2h ago
+**Last Activity:** 20h ago
 
 ### Active Incident
 
@@ -86,7 +86,7 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 ### Recent Headlines
 
-- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(2h ago, priya-k)*
+- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(20h ago, priya-k)*
 - **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(yesterday, marcus-webb)*
 - **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(4 days ago, priya-k)*
 - **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(5 days ago, marcus-webb)*
