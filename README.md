@@ -75,11 +75,11 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 83/100
-**Last Activity:** 4h ago
+**Last Activity:** 20h ago
 
 ### Recent Headlines
 
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(4h ago, sara-chen)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(20h ago, sara-chen)*
 - **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(yesterday, sara-chen)*
 - **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(2 days ago, priya-k)*
 - **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(3 days ago, marcus-webb)*
