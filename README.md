@@ -75,15 +75,15 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 83/100
-**Last Activity:** 22h ago
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **✅ 📊 Truth grade climbs C→B→A as release evidence accumulates** *(22h ago, sara-chen)*
-- **📋 🧭 Coach guides Marcus using Sara's golden billing pattern** *(3 days ago, marcus-webb)*
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(4 days ago, sara-chen)*
-- **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(5 days ago, sara-chen)*
-- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(6 days ago, priya-k)*
+- **📋 📖 Phase 2 intelligence produces deterministic post-incident analysis** *(1h ago, priya-k)*
+- **✅ 📊 Truth grade climbs C→B→A as release evidence accumulates** *(yesterday, sara-chen)*
+- **📋 🧭 Coach guides Marcus using Sara's golden billing pattern** *(4 days ago, marcus-webb)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(5 days ago, sara-chen)*
+- **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(6 days ago, sara-chen)*
 
 ### Developer Scorecards
 
@@ -91,7 +91,7 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 9 | — |
 | Marcus Webb | 0% | 6 | — |
-| Priya K | 0% | 4 | — |
+| Priya K | 0% | 5 | — |
 
 ![Team Health](.github/badges/health.svg)
 
