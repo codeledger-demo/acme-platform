@@ -19,3 +19,5 @@ next-env.d.ts
 !.claude/hooks.json
 CLAUDE.local.md
 .release-worktree/
+.claude/*
+!.claude/
