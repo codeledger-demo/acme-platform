@@ -19,12 +19,20 @@ if [ -n "$GLOBAL_CMD" ]; then
     if [ "$WINNER" = "eq" ]; then
       exec "$GLOBAL_CMD" "$@"
     elif [ "$WINNER" = "a" ]; then
-      echo "⚠️  Global codeledger v$GLOBAL_VER differs from repo-local v$LOCAL_VER — using repo-local." >&2
+      if [ -z "$CODELEDGER_QUIET" ] && [ -z "$CODELEDGER_SKIP_AMBIENT_ACTIVATION" ]; then
+        echo "⚠️  Global codeledger v$GLOBAL_VER is newer than repo-local v$LOCAL_VER — using repo-local." >&2
+        echo "   Run \`codeledger upgrade\` in this repo to update the vendored copy." >&2
+      fi
     else
-      echo "⚠️  Global codeledger v$GLOBAL_VER differs from repo-local v$LOCAL_VER — using repo-local." >&2
+      if [ -z "$CODELEDGER_QUIET" ] && [ -z "$CODELEDGER_SKIP_AMBIENT_ACTIVATION" ]; then
+        echo "⚠️  Repo-local codeledger v$LOCAL_VER is newer than global v$GLOBAL_VER — using repo-local." >&2
+        echo "   Run \`codeledger upgrade --global\` to update the global install." >&2
+      fi
     fi
   else
-    echo "⚠️  Could not compare global vs repo-local version — using repo-local standalone." >&2
+    if [ -z "$CODELEDGER_QUIET" ] && [ -z "$CODELEDGER_SKIP_AMBIENT_ACTIVATION" ]; then
+      echo "⚠️  Could not compare global vs repo-local version — using repo-local standalone." >&2
+    fi
   fi
 fi
 
