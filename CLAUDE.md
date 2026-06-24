@@ -24,12 +24,13 @@ In browser/cloud agent containers, use the pinned runtime directly: `node .codel
 If you need to trigger the rule directly, use `./.codeledger/bin/codeledger auto-refresh --prompt "<user request>"`: refresh on new meaningful tasks, skip acknowledgements like "yes please" or same-task follow-ups.
 Ambient toggles live in `.codeledger/config.json` under `ambient.auto_refresh_enabled` and `ambient.prompt_coach_enabled`.
 For mid-session retrieval, call `./.codeledger/bin/codeledger broker refresh --task "<user request>" --json` first. Use the returned ranked files and bundle delta before falling back to raw shell search.
+Broker responses include `retrievalContract.schema_version: "codeledger/broker-first/v1"`, and hooks/wrappers write `.codeledger/runtime/latest-broker-contract.json` as proof that raw search is only a fallback.
 To inspect the current session state, use `./.codeledger/bin/codeledger broker current --json` for the current bundle/delta and `./.codeledger/bin/codeledger broker timeline --limit 10 --json` for the recent truth tail.
 
 ### CLI Resolution
 
 Use the repo-local wrapper at `./.codeledger/bin/codeledger` when it exists.
-It prefers a newer global `codeledger` install on local machines and falls back to the vendored standalone runtime everywhere else.
+It keeps repo-local behavior stable when versions differ and falls back to the vendored standalone runtime when needed.
 
 ```bash
 # Preferred in a repo after `codeledger init`:
@@ -84,15 +85,17 @@ If you need to activate manually (e.g., to refine the task description):
 Run `./.codeledger/bin/codeledger help` for details on any command.
 
 **Trigger phrases:** If the user asks for a "session summary" or "how did the bundle do" — run `./.codeledger/bin/codeledger session-summary`. Do not construct the output yourself.
+When writing your own final/session summary, append the output of `./.codeledger/bin/codeledger session-summary --agent-addendum` after your work summary so CodeLedger's measured recall/precision and notebook value tag along with the agent recap.
+If you only need the notebook value block, run `./.codeledger/bin/codeledger notebook addendum`. For a human-inspectable view, run `./.codeledger/bin/codeledger notebook recent`.
 
 ### Hooks (Automatic)
 
 Hooks in `.claude/hooks.json` run automatically:
 
-- **SessionStart** — scans repo, warms index
+- **SessionStart** — runs `ensure-session` (init-if-missing + scan-if-stale warmup)
 - **UserPromptSubmit** — intent-aware auto-refresh; skips "yes please" style follow-ups and same-task replies
 - **PreToolUse** — reminds agent to check the active bundle before editing
-- **PostToolUse** — shows bundle recall/precision after git commits
+- **PostToolUse** — shows bundle recall/precision and a compact value receipt after git commits
 - **PreCompact** — saves progress snapshot before context compaction
 - **Stop** — shows final session recap with recall, precision, token savings
 
@@ -100,5 +103,11 @@ Hooks in `.claude/hooks.json` run automatically:
 
 If `CODELEDGER_SESSION` is set, pass `--session $CODELEDGER_SESSION` to commands.
 Session bundle: `.codeledger/sessions/{session-id}/active-bundle.md`.
+
+### Panel (Claude Code Side Panel)
+
+`.claude/launch.json` is pre-configured by `codeledger init` with the CodeLedger Panel server on port 7420.
+**When the user runs `codeledger panel serve` or asks to open the panel**, call `mcp__Claude_Preview__preview_start` with `name: "CodeLedger Panel"` to open the cockpit directly in the Claude Code side panel.
+Do NOT start the server manually via Bash first — let `preview_start` own the process.
 
 <!-- CODELEDGER:END -->

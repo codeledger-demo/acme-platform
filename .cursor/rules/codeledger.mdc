@@ -1,0 +1,26 @@
+---
+description: CodeLedger context control and panel — always apply
+alwaysApply: true
+---
+
+# CodeLedger Integration
+
+CodeLedger is a **real CLI tool** — not a prompt technique. Every command must
+run in an actual shell. Never simulate, fabricate, or paraphrase its output.
+
+### Core rules
+1. **Shell only** — run `codeledger` via your terminal/bash tool. Never fake output.
+2. **Read-only** — never write to `.codeledger/`. Use CLI commands instead.
+3. **Activation** — before any code change, run:
+   `node .codeledger/bin/codeledger-standalone.cjs activate --task "<task>"`
+4. **Session summary** — when asked "how did the bundle do", run:
+   `node .codeledger/bin/codeledger-standalone.cjs session-summary`
+
+### Panel
+When the user runs `codeledger panel serve` or asks to open the CodeLedger
+panel: run `node .codeledger/bin/codeledger-standalone.cjs panel serve`
+then open **http://localhost:7420** in the browser.
+
+### Guardian
+When the user runs `codeledger guardian step complete <id>`, the bundle
+is automatically re-targeted to the next step. No manual activation needed.
