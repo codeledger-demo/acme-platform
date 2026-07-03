@@ -75,21 +75,21 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 83/100
-**Last Activity:** 23h ago
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(23h ago, sara-chen)*
-- **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(yesterday, sara-chen)*
-- **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(2 days ago, marcus-webb)*
-- **📋 🛡️ Doctrine STOP: prevented parallel billing dashboard — guided to extension** *(3 days ago, priya-k)*
-- **📋 🔁 Terminal Replay captured a live remediation flow** *(6 days ago, sara-chen)*
+- **✅ 📊 Agent Intelligence: Claude Code 89% FPS vs Cursor 76% — 13% advantage** *(1h ago, sara-chen)*
+- **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(yesterday, sara-chen)*
+- **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(2 days ago, sara-chen)*
+- **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(3 days ago, marcus-webb)*
+- **📋 🛡️ Doctrine STOP: prevented parallel billing dashboard — guided to extension** *(4 days ago, priya-k)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
-| Sara Chen | 0% | 8 | — |
+| Sara Chen | 0% | 7 | — |
 | Marcus Webb | 0% | 6 | — |
 | Priya K | 0% | 5 | — |
 
