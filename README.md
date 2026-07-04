@@ -75,11 +75,11 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 83/100
-**Last Activity:** 1h ago
+**Last Activity:** 3h ago
 
 ### Recent Headlines
 
-- **✅ 📊 Agent Intelligence: Claude Code 89% FPS vs Cursor 76% — 13% advantage** *(1h ago, sara-chen)*
+- **✅ 📊 Agent Intelligence: Claude Code 89% FPS vs Cursor 76% — 13% advantage** *(3h ago, sara-chen)*
 - **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(yesterday, sara-chen)*
 - **📋 📦 Release Verify CATCH: standalone bundle was stale — rebuilt before release** *(2 days ago, sara-chen)*
 - **✅ ⚡ Terminal Replay helped Marcus resolve a crash in half the time** *(3 days ago, marcus-webb)*
