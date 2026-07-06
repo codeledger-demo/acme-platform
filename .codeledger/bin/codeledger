@@ -19,10 +19,26 @@ if [ -n "$GLOBAL_CMD" ]; then
     if [ "$WINNER" = "eq" ]; then
       exec "$GLOBAL_CMD" "$@"
     elif [ "$WINNER" = "a" ]; then
+      # Global is newer — exec it immediately and copy its standalone CJS to the local vendor dir in background.
+      # Direct file copy (not "codeledger vendor") avoids the vendor command preferring the stale local copy.
       if [ -z "$CODELEDGER_QUIET" ] && [ -z "$CODELEDGER_SKIP_AMBIENT_ACTIVATION" ]; then
-        echo "⚠️  Global codeledger v$GLOBAL_VER is newer than repo-local v$LOCAL_VER — using repo-local." >&2
-        echo "   Run \`codeledger upgrade\` in this repo to update the vendored copy." >&2
+        echo "⬆️  Auto-upgrading: global codeledger v$GLOBAL_VER > repo-local v$LOCAL_VER" >&2
       fi
+      # Try realpath first (resolves npm symlink to the actual package bin dir), then the raw cmd dir.
+      GLOBAL_DIR_REAL="$(dirname "$(realpath "$GLOBAL_CMD" 2>/dev/null || echo "$GLOBAL_CMD")")"
+      GLOBAL_STANDALONE=""
+      for _cand_dir in "$GLOBAL_DIR_REAL" "$(dirname "$GLOBAL_CMD")"; do
+        if [ -f "$_cand_dir/codeledger-standalone.cjs" ]; then
+          GLOBAL_STANDALONE="$_cand_dir/codeledger-standalone.cjs"
+          break
+        fi
+      done
+      if [ -n "$GLOBAL_STANDALONE" ]; then
+        # Atomic copy via temp file to avoid a partial-write race with concurrent readers.
+        _tmp="$SCRIPT_DIR/codeledger-standalone.cjs.$$"
+        (cp "$GLOBAL_STANDALONE" "$_tmp" 2>/dev/null && mv -f "$_tmp" "$SCRIPT_DIR/codeledger-standalone.cjs" 2>/dev/null || rm -f "$_tmp" 2>/dev/null &)
+      fi
+      exec "$GLOBAL_CMD" "$@"
     else
       if [ -z "$CODELEDGER_QUIET" ] && [ -z "$CODELEDGER_SKIP_AMBIENT_ACTIVATION" ]; then
         echo "⚠️  Repo-local codeledger v$LOCAL_VER is newer than global v$GLOBAL_VER — using repo-local." >&2
