@@ -75,11 +75,11 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 
 **Current Arc:** Feature Showcase (Arc 7)
 **Team Health:** 🟡 82/100
-**Last Activity:** 20h ago
+**Last Activity:** 22h ago
 
 ### Recent Headlines
 
-- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(20h ago, priya-k)*
+- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(22h ago, priya-k)*
 - **⚠️ 🛑 Semantic Fortress blocked a contract-breaking change in billing** *(yesterday, marcus-webb)*
 - **✅ 📊 Agent Intelligence: Claude Code 89% FPS vs Cursor 76% — 13% advantage** *(4 days ago, sara-chen)*
 - **✅ ✅ Integrity Trinity PASS: v2.5.0 ships with full deterministic confidence** *(5 days ago, sara-chen)*
