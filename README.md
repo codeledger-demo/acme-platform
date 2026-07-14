@@ -74,23 +74,23 @@ Intelligent Context AI Inc. — Confidential. Internal use only.
 > This is a synthetic demonstration repository operated by CodeLedger.
 
 **Current Arc:** Feature Showcase (Arc 7)
-**Team Health:** 🟡 83/100
-**Last Activity:** 23h ago
+**Team Health:** 🟡 82/100
+**Last Activity:** 1h ago
 
 ### Recent Headlines
 
-- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(23h ago, sara-chen)*
-- **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(3 days ago, sara-chen)*
-- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(4 days ago, priya-k)*
-- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(5 days ago, marcus-webb)*
-- **📋 📐 Change Capsule: OCC 0.42 — context expansion recommended before merge** *(6 days ago, priya-k)*
+- **📋 🧭 Coach guides Marcus using Sara's golden billing pattern** *(1h ago, marcus-webb)*
+- **✅ ⭐ Sara's billing pattern promoted to Golden Pattern status** *(yesterday, sara-chen)*
+- **⚠️ 🚨 Fleet risk spike: auth + billing showing 24h failure concentration** *(4 days ago, sara-chen)*
+- **✅ ✨ Golden Pattern matched: Priya followed Sara's notification template approach** *(5 days ago, priya-k)*
+- **🚨 🚫 Change Capsule blocked auth middleware change — CRS 0.81** *(6 days ago, marcus-webb)*
 
 ### Developer Scorecards
 
 | Developer | CIC Pass Rate | PRs (30d) | Trend |
 |-----------|--------------|-----------|-------|
 | Sara Chen | 0% | 8 | — |
-| Marcus Webb | 0% | 6 | — |
+| Marcus Webb | 0% | 7 | — |
 | Priya K | 0% | 5 | — |
 
 ![Team Health](.github/badges/health.svg)
