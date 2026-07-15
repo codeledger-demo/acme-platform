@@ -93,23 +93,13 @@ jobs:
           git commit -m "chore: vendor codeledger CLI v${VERSION}"
           git push origin "$BRANCH"
 
+          PR_BODY=$(printf '## Summary\n\nAutomatic CLI vendor update for CodeLedger **v%s**.\n\nUpdates `.codeledger/bin/codeledger-standalone.cjs` so `codeledger-post-merge.yml`\nhas access to all commands shipped in this release.\n\n**Trigger:** `%s` from codeledgerECF/codeledger-blackbox\n\n:robot: Auto-generated - will auto-merge when CI passes.\n' "$VERSION" "${{ github.event_name }}")
+
           PR_URL=$(gh pr create \
             --title "chore: vendor codeledger CLI v${VERSION}" \
             --base main \
             --head "$BRANCH" \
-            --body "$(cat <<EOF
-## Summary
-
-Automatic CLI vendor update for CodeLedger **v${VERSION}**.
-
-Updates \`.codeledger/bin/codeledger-standalone.cjs\` so \`codeledger-post-merge.yml\`
-has access to all commands shipped in this release.
-
-**Trigger:** \`${{ github.event_name }}\` from codeledgerECF/codeledger-blackbox
-
-🤖 Auto-generated — will auto-merge when CI passes.
-EOF
-)")
+            --body "$PR_BODY")
           echo "Created PR: $PR_URL"
 
           # Enable auto-merge so it lands without manual intervention
