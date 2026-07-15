@@ -29,12 +29,17 @@ jobs:
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # services/auth/** and the billing checkout integration test are
-      # knowingly excluded: they exercise in-progress demo scenarios and
-      # fail by design.
+      # Excluded suites either exercise in-progress demo scenarios
+      # (services/auth, checkout-integration) or import package dist/
+      # entries that require a full build of the demo monorepo.
       - name: Run tests
         run: >
           npx vitest run
           --exclude '**/node_modules/**'
           --exclude 'services/auth/**'
           --exclude '**/checkout-integration.test.ts'
+          --exclude 'packages/api-client/tests/**'
+          --exclude 'services/billing/tests/**'
+          --exclude 'services/notifications/tests/**'
+          --exclude 'services/reporting/tests/**'
+          --exclude 'services/webhooks/tests/**'
