@@ -24,12 +24,12 @@ if [ -n "$GLOBAL_CMD" ]; then
       if [ -z "$CODELEDGER_QUIET" ] && [ -z "$CODELEDGER_SKIP_AMBIENT_ACTIVATION" ]; then
         echo "⬆️  Auto-upgrading: global codeledger v$GLOBAL_VER > repo-local v$LOCAL_VER" >&2
       fi
-      # Try realpath first (resolves npm symlink to the actual package bin dir), then the raw cmd dir.
+      # Try npm package dirs, home vendored runtime, then the release-cache path.
       GLOBAL_DIR_REAL="$(dirname "$(realpath "$GLOBAL_CMD" 2>/dev/null || echo "$GLOBAL_CMD")")"
       GLOBAL_STANDALONE=""
-      for _cand_dir in "$GLOBAL_DIR_REAL" "$(dirname "$GLOBAL_CMD")"; do
-        if [ -f "$_cand_dir/codeledger-standalone.cjs" ]; then
-          GLOBAL_STANDALONE="$_cand_dir/codeledger-standalone.cjs"
+      for _cand in "$GLOBAL_DIR_REAL/codeledger-standalone.cjs" "$(dirname "$GLOBAL_CMD")/codeledger-standalone.cjs" "$HOME/.codeledger/bin/codeledger-standalone.cjs" "${CODELEDGER_CACHE_DIR:-$HOME/.cache/codeledger/bin}/codeledger-standalone-v${GLOBAL_VER}.cjs"; do
+        if [ -f "$_cand" ]; then
+          GLOBAL_STANDALONE="$_cand"
           break
         fi
       done
