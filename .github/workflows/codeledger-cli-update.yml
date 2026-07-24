@@ -68,6 +68,7 @@ jobs:
         run: |
           VERSION="${{ steps.ver.outputs.version }}"
           codeledger init --force
+          rm -f AGENTS.md
           echo "Vendored codeledger v${VERSION} into .codeledger/bin/"
 
       - name: Open auto-merge PR with updated vendored CLI
@@ -88,7 +89,7 @@ jobs:
           fi
 
           git checkout -b "$BRANCH"
-          git add .codeledger/bin/ .gitignore
+          git add -f .codeledger/bin/ .gitignore
           git diff --cached --quiet && echo "No CLI changes (already up-to-date)" && exit 0
 
           git commit -m "chore: vendor codeledger CLI v${VERSION}"
