@@ -43,6 +43,7 @@ jobs:
       - uses: actions/setup-node@v5
         with:
           node-version: 22
+          package-manager-cache: false
 
       - name: Resolve version
         id: ver
@@ -104,4 +105,3 @@ jobs:
 
           # Enable auto-merge so it lands without manual intervention
           gh pr merge --auto --squash "$PR_URL" || echo "Auto-merge not available — merge manually"
-
