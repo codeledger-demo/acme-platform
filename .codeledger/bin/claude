@@ -12,10 +12,14 @@ run_auto_refresh() {
   fi
   "$SCRIPT_DIR/codeledger" auto-refresh --quiet --prompt "$prompt" >/dev/null 2>&1 || true
   mkdir -p "$REPO_ROOT/.codeledger/runtime"
-  CODELEDGER_SKIP_AMBIENT_ACTIVATION=1 "$SCRIPT_DIR/codeledger" broker refresh --task "$prompt" --json > "$REPO_ROOT/.codeledger/runtime/latest-broker-refresh.json" 2>/dev/null || true
+  local refresh_status="ok"
+  if ! CODELEDGER_SKIP_AMBIENT_ACTIVATION=1 "$SCRIPT_DIR/codeledger" broker refresh --task "$prompt" --json > "$REPO_ROOT/.codeledger/runtime/latest-broker-refresh.json" 2>/dev/null; then
+    refresh_status="degraded"
+    printf '%s\n' '{"schema_version":"codeledger/broker-refresh-degraded/v1","status":"degraded","degraded":true,"reason":"broker refresh failed"}' > "$REPO_ROOT/.codeledger/runtime/latest-broker-refresh.json" 2>/dev/null || true
+  fi
   CODELEDGER_SKIP_AMBIENT_ACTIVATION=1 "$SCRIPT_DIR/codeledger" broker current --json > "$REPO_ROOT/.codeledger/runtime/latest-broker-current.json" 2>/dev/null || true
   CODELEDGER_SKIP_AMBIENT_ACTIVATION=1 "$SCRIPT_DIR/codeledger" broker timeline --limit 10 --json > "$REPO_ROOT/.codeledger/runtime/latest-broker-timeline.json" 2>/dev/null || true
-  printf '%s\n' '{"schema_version":"codeledger/broker-first/v1","policy":"broker_first","refresh_artifact":".codeledger/runtime/latest-broker-refresh.json","current_artifact":".codeledger/runtime/latest-broker-current.json","timeline_artifact":".codeledger/runtime/latest-broker-timeline.json","raw_search":"fallback_after_broker_insufficient"}' > "$REPO_ROOT/.codeledger/runtime/latest-broker-contract.json" 2>/dev/null || true
+  printf '{"schema_version":"codeledger/broker-first/v1","policy":"broker_first","refresh_artifact":".codeledger/runtime/latest-broker-refresh.json","current_artifact":".codeledger/runtime/latest-broker-current.json","timeline_artifact":".codeledger/runtime/latest-broker-timeline.json","raw_search":"fallback_after_broker_insufficient","status":"%s"}\n' "$refresh_status" > "$REPO_ROOT/.codeledger/runtime/latest-broker-contract.json" 2>/dev/null || true
 }
 if [ $# -eq 0 ]; then
   ensure_session
