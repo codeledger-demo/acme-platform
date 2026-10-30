@@ -1,11 +1,11 @@
 node_modules/
 dist/
 .next/
-.codeledger/
+.codeledger/*
 !.codeledger/
 !.codeledger/bin/
 !.codeledger/bin/**
-.claude/
+.claude/*
 .env
 .env.local
 *.tsbuildinfo
@@ -21,3 +21,11 @@ CLAUDE.local.md
 .release-worktree/
 .claude/*
 !.claude/
+!.codeledger/runtime.json
+!.claude/settings.json
+!.codeledger/
+!.codeledger/bin/
+!.codeledger/bin/**
+!.codeledger/runtime.json
+!.claude/
+!.claude/settings.json
